@@ -191,3 +191,70 @@ The measurements cover Berlin, Romania, Germany, and the planet with three repet
 The experiments contain 84 measured processes and 28 preliminary processes.
 Input sizes and modification times remain unchanged.
 The original C++ repository remains unchanged.
+
+## C++ example, test, and benchmark ports
+
+The independent agent `cpp_port_review` examined the complete task changes against revision `e6095f2` with fresh context.
+The review included all new files, surrounding decoder code, export formats, unit tests, fixtures, benchmark metrics, and comparison runners.
+The reviewer compared the ports with the original C++ source files.
+The task adds nine integration examples, additional unit-test coverage, and two benchmark runners without new Cargo dependencies.
+
+The first review reproduced a benchmark deadlock after partial random-worker creation.
+A fixed barrier left existing workers waiting when a later thread creation failed.
+The author confirmed this defect with an injected `pthread_create` failure and a five-second timeout.
+The correction uses fallible thread creation, a readiness channel, and a cancelable start signal.
+The new regression test checks both random modes.
+It requires Linux and a C compiler; other environments skip this specific fault-injection check.
+
+The second review examined the correction and its interactions with the complete task change.
+The reviewer independently injected failures after zero, one, two, and three successful worker starts in both random modes.
+All eight cases returned errors without a panic or timeout.
+A malformed trailing descriptor also returned an index error without waiting indefinitely.
+The reviewer reran all four Python benchmark tests.
+No implementation finding remains unresolved after two review cycles.
+
+The author removed an initial CSV text restriction to preserve the original literal output format.
+The reviewer verified this change against the C++ exporter.
+Binary export retains checked lengths, coordinate conversions, NUL termination, buffered writes, and explicit output synchronization.
+The documentation records original format limits and intentional Rust adaptations.
+
+### Validation
+
+The native decompressor with mapping enabled passed 62 test executions and two compile-fail examples.
+The pure Rust decompressor with mapping enabled passed the same checks.
+Rust 1.85 passed all 62 test executions with the native decompressor and mapping enabled.
+All-target, all-feature Clippy passed with warnings denied.
+The pure Rust configuration with mapping enabled passed an all-target Windows GNU compilation check.
+Windows execution was unavailable.
+
+The example checks passed all five test groups.
+These checks include C++ comparisons on both original PBF fixtures and the generated statistics fixture.
+They compare CSV lines and parsed binary records independently of worker order.
+The benchmark parity script passed all 208 C++/Rust comparisons.
+The benchmark checks passed all four test groups, including forced thread-creation failure.
+
+The extended runner completed 336 processes across 28 cases, two worker counts, one warmup, and two measured rounds.
+The author repeated the affected random cases after the startup correction.
+Those checks produced 48 additional processes with matching counts and checksums.
+These fixture runs validate the benchmark tools; they do not establish large-map performance.
+Git excludes the local records under `target/port-validation/`.
+The original C++ source and `/mnt/maps` inputs remain unchanged.
+
+The imported allocation test initially counted five Rust allocator calls per repeated compressed-block decode.
+The corrected implementation makes zero calls after buffer preparation for that fixture.
+The test does not count native decompressor allocations or establish zero allocation for fragmented fields and entity materialization.
+The imported descriptor test also verified the corrected final-value behavior for `BlobHeader.datasize`.
+
+### Document review
+
+The reviewer examined `README.md`, `docs/development/CPP_TEST_PORT.md`, and `docs/benchmarks/PROCEDURE.md` against the source.
+It checked local links, export contracts, timer boundaries, runner cases, and documented commands.
+It executed the documented example invocations with temporary output directories.
+The author corrected ambiguous mutex terminology, payload-size terminology, passive wording, and the description of unavailable metric summaries.
+The author also reviewed this review record against the validation logs and reviewer reports.
+
+Python syntax, Rust formatting, local links, and Git whitespace checks passed.
+The language review checked sentence lengths, paragraph limits, active voice, and consistent terms.
+The complete ASD-STE100 dictionary was unavailable; an attempted official-site request returned HTTP 403.
+Full dictionary compliance remains unverified.
+The independent reviewer did not repeat large-map benchmarks or Windows execution.

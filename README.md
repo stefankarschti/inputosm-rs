@@ -218,6 +218,7 @@ These differences affect random-access performance and memory measurements.
 - [Rust concepts](docs/development/RUST_GUIDE.md)
 - [Architecture](docs/architecture/OVERVIEW.md)
 - [Port plan](docs/development/PLAN.md)
+- [C++ examples, tests, and benchmark ports](docs/development/CPP_TEST_PORT.md)
 - [Review record](docs/development/REVIEW.md)
 - [Benchmark procedure](docs/benchmarks/PROCEDURE.md)
 - [Benchmark results](docs/benchmarks/RESULTS.md)
