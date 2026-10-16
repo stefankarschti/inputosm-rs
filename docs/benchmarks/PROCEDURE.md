@@ -6,9 +6,9 @@ The Python runner measures process CPU time and peak resident memory with `/usr/
 
 The main timing uses `total_seconds` from each executable.
 It includes reader setup, reading, and teardown.
-C++ excludes its live-memory sampling from this timing.
+Both implementations exclude live-memory sampling from this timing.
 Process wall and CPU measurements include that sampling.
-Rust does not perform that sampling.
+Earlier recorded Rust measurements predate the sampling and timer changes described below.
 
 ```sh
 cargo build --release --bin pbf_benchmark
@@ -67,3 +67,86 @@ python3 test/benchmark/parity.py --cpp target/comparison/cpp --rust target/relea
 The parity script compares all field masks on the two original PBF fixtures.
 It also compares random access, indexed access, and resolved entities.
 The complete run contains 208 C++/Rust comparisons.
+
+
+## Original benchmark workflows
+
+The imported runners compare the current C++ and Rust executables.
+They copy both binaries into a new output directory and record their SHA-256 hashes.
+They retain each command, raw CSV, standard error, input metadata, and summary statistics.
+They check counts and checksums across implementations and repetitions.
+
+```sh
+python3 test/benchmark/run_comparison.py \
+  --cpp target/comparison/cpp --rust target/release/pbf_benchmark \
+  --input tests/data/comprehensive.osm.pbf \
+  --output target/comparison/basic --threads 1 4 --rounds 3 --requests 256
+python3 test/benchmark/run_deferred.py \
+  --cpp target/comparison/cpp --rust target/release/pbf_benchmark \
+  --input tests/data/comprehensive.osm.pbf \
+  --output target/comparison/deferred --threads 1 4 --rounds 3 --requests 256
+```
+
+The basic matrix includes entity and block reads with metadata disabled and enabled.
+It also includes random reads with and without an index.
+The extended matrix adds all 15 nonzero count masks, selected-field workloads, strings, full values, and random count reads.
+Its `full-values` case includes optional way locations and string bytes.
+This case differs from the earlier `compare.py` workload named `full`.
+
+Use `--only TEXT` to select case names that contain `TEXT`.
+Each case has one warmup per implementation and thread count.
+The runners alternate implementation order for subsequent rounds.
+The default is three measured rounds with 1 and 32 workers.
+Each run accepts one input file.
+Use a separate output directory for each map.
+
+Random requests use consecutive indexes from 1 through the maximum data-block index.
+The runners reject random workloads when unknown blocks interrupt this sequence.
+Use a sequential case filter for such files.
+They also reject random workloads for files without data blocks.
+
+### Timing boundaries
+
+| CSV field | Scope |
+|---|---|
+| `setup_seconds` | Reader construction and random-worker preparation. |
+| `index_build_seconds` | Concurrent index construction and random-worker startup; also included in setup time. |
+| `read_seconds` | Selected read operations and callback work. Random workers complete preparation before this interval. |
+| `teardown_seconds` | Explicit reader destruction after memory sampling. |
+| `total_seconds` | Setup, reading, and teardown, excluding live-memory sampling. |
+
+The `entities` mode constructs and destroys its reader inside `input_file()`.
+Its read time therefore includes that complete operation, and its setup time is zero.
+Bulk block reads include worker startup and shutdown within their read time.
+Random modes use one reader per worker and retain those readers through live-memory sampling.
+Bulk workers can release their buffers before that sample.
+The Rust reader retains separate indexes; C++ readers can share an index.
+
+These boundaries replace the earlier Rust benchmark's combined read and destruction interval.
+Historical result files remain unchanged.
+Do not combine historical and current `read_seconds` values without accounting for the different boundaries.
+
+### Resource counters
+
+The Rust executable obtains Linux counters from `/proc/self/stat`, `/proc/self/status`, and `/proc/self/smaps_rollup`.
+It uses `getconf CLK_TCK` once before the measured repetitions.
+CPU time uses process user and system ticks, so short runs can report zero.
+C++ uses `getrusage`, which has finer CPU-time resolution.
+The Rust `max_rss_kib` value comes from `VmHWM`; C++ uses `ru_maxrss`.
+Both are process-wide maxima and can include earlier repetitions.
+
+Live-memory columns report RSS, PSS, anonymous PSS, and page-table memory in KiB.
+Fault columns report process-counter differences for each repetition.
+Resource collection occurs outside the wall-clock read interval.
+CPU and fault differences include live-memory sampling.
+If a counter is unavailable, the Rust CSV field is empty.
+This includes unsupported platforms and restricted `/proc` files.
+
+The runners also sample process RSS, anonymous RSS, and page-table memory every 50 milliseconds on Linux.
+These peaks can miss short-lived allocations.
+The executable publishes its procfs PID through `INPUTOSM_BENCH_PID_FILE` for namespace-aware sampling.
+If no sample exists, the summary reports `null` for that sampled metric.
+For available metrics, the summary records the sample count.
+
+Python checks validate argument failures, repeated rows, effective field masks, timing arithmetic, manifests, and retained reports.
+The fixture matrix validates execution and output parity; its timings do not establish large-map performance.

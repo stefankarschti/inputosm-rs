@@ -1,5 +1,40 @@
 use crate::{inputosm::require, inputosmpbf::wire::*, *};
 
+// Keep one packed field on the stack. Fragmented fields use the overflow buffer.
+#[derive(Default)]
+pub(crate) struct Fields<'a> {
+    first: [Field<'a>; 1],
+    occupied: bool,
+    overflow: Vec<Field<'a>>,
+}
+impl<'a> Fields<'a> {
+    pub fn push(&mut self, field: Field<'a>) {
+        if !self.occupied {
+            self.first[0] = field;
+            self.occupied = true;
+        } else {
+            if self.overflow.is_empty() {
+                self.overflow.push(self.first[0]);
+            }
+            self.overflow.push(field);
+        }
+    }
+    pub fn clear(&mut self) {
+        self.occupied = false;
+        self.overflow.clear();
+    }
+}
+impl<'a> std::ops::Deref for Fields<'a> {
+    type Target = [Field<'a>];
+    fn deref(&self) -> &Self::Target {
+        if self.overflow.is_empty() {
+            &self.first[..usize::from(self.occupied)]
+        } else {
+            &self.overflow
+        }
+    }
+}
+
 #[derive(Default)]
 pub(crate) struct Columns {
     pub ids: Vec<i64>,
@@ -261,7 +296,7 @@ impl Columns {
         self.count += 1;
         Ok(())
     }
-    fn packed_info(&mut self, fields: &[Vec<Field<'_>>; 10]) -> Result<bool> {
+    fn packed_info(&mut self, fields: &[Fields<'_>; 10]) -> Result<bool> {
         let mut encoded: [&[u8]; 6] = [&[]; 6];
         let mut present = 0;
         for i in 0..6 {
@@ -327,7 +362,7 @@ impl Columns {
         )?;
         Ok(true)
     }
-    pub fn dense(&mut self, fields: &[Vec<Field<'_>>; 10], options: NodeOptions) -> Result<()> {
+    pub fn dense(&mut self, fields: &[Fields<'_>; 10], options: NodeOptions) -> Result<()> {
         fn deltas(fields: &[Field<'_>], out: &mut Vec<i64>) -> Result<()> {
             let mut value = 0;
             for f in fields {
@@ -343,7 +378,7 @@ impl Columns {
             deltas(&fields[0], &mut self.ids)?;
             self.count = self.ids.len();
         } else {
-            for f in &fields[0] {
+            for f in fields[0].iter() {
                 self.count += f.count()?;
             }
         }
@@ -366,7 +401,7 @@ impl Columns {
             for (column, list) in fields.iter().enumerate().skip(4) {
                 let mut i = 0;
                 let mut acc = 0;
-                for f in list {
+                for f in list.iter() {
                     f.repeated(|v| {
                         require(i < self.count, "Extra dense metadata value")?;
                         let item = &mut self.info[i];
@@ -403,7 +438,7 @@ impl Columns {
             self.tag_offsets.push(0);
             let mut key = None;
             let mut any = false;
-            for f in &fields[3] {
+            for f in fields[3].iter() {
                 f.repeated(|v| {
                     any = true;
                     require(self.tag_offsets.len() <= self.count, "Extra dense tags")?;
@@ -485,7 +520,7 @@ impl Columns {
 
 pub(crate) fn collect_dense<'a>(
     bytes: &'a [u8],
-    fields: &mut [Vec<Field<'a>>; 10],
+    fields: &mut [Fields<'a>; 10],
     options: NodeOptions,
 ) -> Result<()> {
     let mut r = Wire::new(bytes);

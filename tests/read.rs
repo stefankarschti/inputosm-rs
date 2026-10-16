@@ -158,73 +158,8 @@ fn xml_and_osc_modes() {
     assert_eq!(*h.0.lock().unwrap(), (2, 1, 1, 33));
 }
 
-mod data {
-    use super::*;
-    pub fn var(mut v: u64) -> Vec<u8> {
-        let mut out = Vec::new();
-        while v >= 128 {
-            out.push(v as u8 | 128);
-            v >>= 7;
-        }
-        out.push(v as u8);
-        out
-    }
-    pub fn int(n: u64, v: u64) -> Vec<u8> {
-        [var(n << 3), var(v)].concat()
-    }
-    pub fn msg(n: u64, bytes: &[u8]) -> Vec<u8> {
-        [var(n << 3 | 2), var(bytes.len() as u64), bytes.to_vec()].concat()
-    }
-    pub fn zz(v: i64) -> u64 {
-        ((v as u64) << 1) ^ ((v >> 63) as u64)
-    }
-    pub fn packed(n: u64, values: &[u64]) -> Vec<u8> {
-        msg(n, &values.iter().flat_map(|v| var(*v)).collect::<Vec<_>>())
-    }
-    pub fn block(kind: &[u8], raw: &[u8]) -> Vec<u8> {
-        blob(kind, &msg(1, raw))
-    }
-    pub fn blob(kind: &[u8], blob: &[u8]) -> Vec<u8> {
-        let header = [msg(1, kind), int(3, blob.len() as u64)].concat();
-        [
-            (header.len() as u32).to_be_bytes().to_vec(),
-            header,
-            blob.to_vec(),
-        ]
-        .concat()
-    }
-    pub fn header() -> Vec<u8> {
-        block(
-            b"OSMHeader",
-            &[msg(4, b"OsmSchema-V0.6"), msg(5, b"LocationsOnWays")].concat(),
-        )
-    }
-    pub fn table() -> Vec<u8> {
-        msg(1, &[msg(1, b""), msg(1, b"key"), msg(1, b"value")].concat())
-    }
-    pub struct Temp(pub PathBuf);
-    impl Temp {
-        pub fn bytes(bytes: &[u8], extension: &str) -> Self {
-            static NEXT: AtomicUsize = AtomicUsize::new(0);
-            let path = std::env::temp_dir().join(format!(
-                "inputosm-test-{}-{}.{}",
-                std::process::id(),
-                NEXT.fetch_add(1, Ordering::Relaxed),
-                extension
-            ));
-            std::fs::write(&path, bytes).unwrap();
-            Self(path)
-        }
-        pub fn pbf(raw: &[u8]) -> Self {
-            Self::bytes(&[header(), block(b"OSMData", raw)].concat(), "pbf")
-        }
-    }
-    impl Drop for Temp {
-        fn drop(&mut self) {
-            let _ = std::fs::remove_file(&self.0);
-        }
-    }
-}
+#[path = "common/mod.rs"]
+mod data;
 use data::*;
 fn selected_payload() -> Vec<u8> {
     let info = [
@@ -575,23 +510,6 @@ fn malformed_xml_and_exact_decimal_coordinates() {
     input_file(&file.0, InputOptions::default(), &Exact).unwrap();
 }
 
-fn stored_zlib(raw: &[u8]) -> Vec<u8> {
-    assert!(raw.len() < 65536);
-    let length = raw.len() as u16;
-    let (mut a, mut b) = (1u32, 0u32);
-    for &byte in raw {
-        a = (a + u32::from(byte)) % 65521;
-        b = (b + a) % 65521;
-    }
-    [
-        vec![0x78, 0x01, 1],
-        length.to_le_bytes().to_vec(),
-        (!length).to_le_bytes().to_vec(),
-        raw.to_vec(),
-        ((b << 16) | a).to_be_bytes().to_vec(),
-    ]
-    .concat()
-}
 #[test]
 fn compressed_blob_validation() {
     let raw = selected_payload();
