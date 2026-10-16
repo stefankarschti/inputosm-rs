@@ -1,3 +1,5 @@
+mod metrics;
+
 use inputosm::*;
 use std::{sync::Mutex, time::Instant};
 
@@ -295,17 +297,28 @@ fn run() -> Result<()> {
     } else {
         vec![]
     };
+    let file_bytes = std::fs::metadata(path)?.len();
+    let ticks_per_second = metrics::ticks_per_second();
+    if let Some(path) = std::env::var_os("INPUTOSM_BENCH_PID_FILE") {
+        let pid = std::fs::read_link("/proc/self")
+            .unwrap_or_else(|_| std::path::PathBuf::from(std::process::id().to_string()));
+        std::fs::write(path, pid.to_string_lossy().as_bytes())?;
+    }
     println!(
-        "mode,threads,metadata,iteration,file_bytes,setup_seconds,read_seconds,total_seconds,index_build_seconds,blocks,max_index,nodes,ways,relations,checksum,values_checksum,strings,index_bytes"
+        "mode,threads,metadata,iteration,file_bytes,requests,setup_seconds,read_seconds,total_seconds,cpu_seconds,max_rss_kib,minor_faults,major_faults,blocks,max_index,nodes,ways,relations,checksum,index_bytes,live_rss_kib,live_pss_kib,live_anon_kib,index_build_seconds,teardown_seconds,page_table_kib,node_fields,way_fields,relation_fields,count_fields,strings,values_checksum,consume"
     );
     for iteration in 0..repetitions {
-        let start = Instant::now();
         let mut index_seconds = 0.;
         let mut index_bytes = 0;
         let counters: Vec<_> = (0..threads)
             .map(|_| Counter(Mutex::new(Totals::default())))
             .collect();
+        let before = metrics::Usage::read();
+        let start = Instant::now();
         let ready;
+        let work_finish;
+        let measured;
+        let memory;
         if mode == "entities" {
             struct Handler<'a> {
                 counters: &'a [Counter],
@@ -343,7 +356,7 @@ fn run() -> Result<()> {
                     Ok(())
                 }
             }
-            ready = Instant::now();
+            ready = start;
             input_file(
                 path,
                 InputOptions {
@@ -355,6 +368,9 @@ fn run() -> Result<()> {
                     consume: selection.consume != "count",
                 },
             )?;
+            work_finish = Instant::now();
+            memory = metrics::Memory::read();
+            measured = work_finish.elapsed();
         } else if mode == "blocks" {
             let mut reader = PbfReader::open(path)?;
             reader.set_thread_count(threads);
@@ -366,71 +382,142 @@ fn run() -> Result<()> {
                     .unwrap()
                     .consume(b, &selection)
             })?;
+            work_finish = Instant::now();
+            memory = metrics::Memory::read();
+            measured = work_finish.elapsed();
+            drop(reader);
         } else {
             let mut readers = (0..threads)
                 .map(|_| PbfReader::open(path))
                 .collect::<Result<Vec<_>>>()?;
             let index_start = Instant::now();
-            if mode == "random-index" {
-                std::thread::scope(|scope| -> Result<()> {
-                    let handles: Vec<_> = readers
-                        .iter_mut()
-                        .map(|r| scope.spawn(|| r.build_index()))
-                        .collect();
-                    for h in handles {
-                        h.join().map_err(|_| Error::WorkerPanic)??;
-                    }
-                    Ok(())
-                })?;
-                index_seconds = index_start.elapsed().as_secs_f64();
-                index_bytes = readers.iter().map(PbfReader::index_memory_bytes).sum();
-            }
-            ready = Instant::now();
+            let gate = (Mutex::new(None), std::sync::Condvar::new());
+            let mut ready_time = start;
             std::thread::scope(|scope| -> Result<()> {
-                let handles: Vec<_> = readers
-                    .iter_mut()
-                    .enumerate()
-                    .map(|(worker, r)| {
-                        let indexes = &indexes;
-                        let selection = &selection;
-                        let counters = &counters;
-                        scope.spawn(move || -> Result<()> {
-                            let mut t = Totals::default();
-                            for &index in indexes.iter().skip(worker).step_by(threads) {
-                                r.read_block(index, |b| t.consume(b, selection))?;
+                let (sender, receiver) = std::sync::mpsc::channel();
+                let mut handles = Vec::with_capacity(threads);
+                let mut result = Ok(());
+                for (worker, reader) in readers.iter_mut().enumerate() {
+                    let (indexes, selection, counters, gate) =
+                        (&indexes, &selection, &counters, &gate);
+                    let sender = sender.clone();
+                    let handle =
+                        std::thread::Builder::new().spawn_scoped(scope, move || -> Result<()> {
+                            let indexed =
+                                std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                                    if mode == "random-index" {
+                                        reader.build_index()
+                                    } else {
+                                        Ok(())
+                                    }
+                                }))
+                                .unwrap_or(Err(Error::WorkerPanic));
+                            sender.send(()).map_err(|_| Error::Cancelled)?;
+                            let started = gate
+                                .1
+                                .wait_while(gate.0.lock().unwrap(), |state| state.is_none())
+                                .unwrap();
+                            if *started != Some(true) {
+                                return Err(Error::Cancelled);
                             }
-                            counters[worker].0.lock().unwrap().merge(t);
+                            drop(started);
+                            indexed?;
+                            let mut total = Totals::default();
+                            for &index in indexes.iter().skip(worker).step_by(threads) {
+                                reader
+                                    .read_block(index, |block| total.consume(block, selection))?;
+                            }
+                            counters[worker].0.lock().unwrap().merge(total);
                             Ok(())
-                        })
-                    })
-                    .collect();
-                for h in handles {
-                    h.join().map_err(|_| Error::WorkerPanic)??;
+                        });
+                    match handle {
+                        Ok(handle) => handles.push(handle),
+                        Err(error) => {
+                            result = Err(error.into());
+                            break;
+                        }
+                    }
                 }
-                Ok(())
+                drop(sender);
+                if result.is_ok() {
+                    for _ in 0..threads {
+                        if receiver.recv().is_err() {
+                            result = Err(Error::WorkerPanic);
+                            break;
+                        }
+                    }
+                }
+                ready_time = Instant::now();
+                *gate.0.lock().unwrap() = Some(result.is_ok());
+                gate.1.notify_all();
+                for handle in handles {
+                    let joined = handle.join().unwrap_or(Err(Error::WorkerPanic));
+                    if result.is_ok() {
+                        result = joined;
+                    }
+                }
+                result
             })?;
+            ready = ready_time;
+            if mode == "random-index" {
+                index_seconds = (ready - index_start).as_secs_f64();
+            }
+            index_bytes = readers.iter().map(PbfReader::index_memory_bytes).sum();
+            work_finish = Instant::now();
+            memory = metrics::Memory::read();
+            measured = work_finish.elapsed();
+            drop(readers);
         }
         let end = Instant::now();
+        let after = metrics::Usage::read();
+        let [cpu, minor_faults, major_faults] = after.differences(&before, ticks_per_second);
         let mut total = Totals::default();
         for c in counters {
             total.merge(c.0.into_inner().unwrap());
         }
-        println!(
-            "{mode},{threads},{},{iteration},{},{:.9},{:.9},{:.9},{index_seconds:.9},{},{},{},{},{},{},{},{},{index_bytes}",
-            u8::from(metadata),
-            std::fs::metadata(path)?.len(),
-            (ready - start).as_secs_f64(),
-            (end - ready).as_secs_f64(),
-            (end - start).as_secs_f64(),
-            total.blocks,
-            total.max_index,
-            total.nodes,
-            total.ways,
-            total.relations,
-            total.checksum,
-            total.values_checksum,
-            total.strings
-        );
+        let requests = if mode.starts_with("random") {
+            requests
+        } else {
+            0
+        };
+        let mask = |m: Option<usize>| m.map(|n| n.to_string()).unwrap_or_else(|| "-1".into());
+        let fields = [
+            mode.to_string(),
+            threads.to_string(),
+            u8::from(metadata).to_string(),
+            iteration.to_string(),
+            file_bytes.to_string(),
+            requests.to_string(),
+            format!("{:.9}", (ready - start).as_secs_f64()),
+            format!("{:.9}", (work_finish - ready).as_secs_f64()),
+            format!("{:.9}", (end - start - measured).as_secs_f64()),
+            cpu,
+            metrics::display(after.max_rss),
+            minor_faults,
+            major_faults,
+            total.blocks.to_string(),
+            total.max_index.to_string(),
+            total.nodes.to_string(),
+            total.ways.to_string(),
+            total.relations.to_string(),
+            total.checksum.to_string(),
+            index_bytes.to_string(),
+            metrics::display(memory.rss),
+            metrics::display(memory.pss),
+            metrics::display(memory.anonymous),
+            format!("{index_seconds:.9}"),
+            format!("{:.9}", (end - work_finish - measured).as_secs_f64()),
+            metrics::display(memory.page_tables),
+            mask(masks[0]),
+            mask(masks[1]),
+            mask(masks[2]),
+            selection.counts.to_string(),
+            total.strings.to_string(),
+            total.values_checksum.to_string(),
+            selection.consume.clone(),
+        ];
+        println!("{}", fields.join(","));
+        std::io::Write::flush(&mut std::io::stdout())?;
     }
     Ok(())
 }
