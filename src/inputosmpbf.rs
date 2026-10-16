@@ -200,7 +200,7 @@ pub(crate) mod wire {
     }
 }
 
-use crate::pbfcolumns::{Columns, collect_dense};
+use crate::pbfcolumns::{Columns, Fields, collect_dense};
 use std::{
     fs::File,
     io::{BufReader, Read, Seek, SeekFrom},
@@ -335,13 +335,20 @@ fn blob_data(blob: &[u8], scratch: &mut Scratch) -> Result<()> {
     }
     Ok(())
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum BlockKind {
+    Header,
+    Data,
+    Unknown,
+}
+
 #[derive(Clone, Debug)]
 struct Descriptor {
     index: usize,
     offset: u64,
     payload_offset: u64,
     size: usize,
-    kind: Vec<u8>,
+    kind: BlockKind,
 }
 fn descriptor(
     file: &mut File,
@@ -384,22 +391,30 @@ fn read_descriptor(
     let mut blob_size = None;
     while let Some(f) = r.next()? {
         match f.number {
-            1 => kind = Some(f.message()?.to_vec()),
+            1 => {
+                let bytes = f.message()?;
+                kind = Some(bytes);
+            }
             3 => {
-                let v = narrow(f.integer()? as i64)?;
-                require(v >= 0 && v as usize <= MAX_BLOB, "Invalid Blob size")?;
-                blob_size = Some(v as usize);
+                blob_size = Some(f.integer()?);
             }
             _ => {}
         }
     }
     let kind = kind.ok_or(Error::Invalid("Missing Blob type"))?;
     require(!kind.is_empty(), "Empty Blob type")?;
+    let kind = match kind {
+        b"OSMHeader" => BlockKind::Header,
+        b"OSMData" => BlockKind::Data,
+        _ => BlockKind::Unknown,
+    };
     let size = blob_size.ok_or(Error::Invalid("Missing Blob size"))?;
+    require(size <= MAX_BLOB as u64, "Invalid Blob size")?;
+    let size = size as usize;
     let payload_offset = offset + 4 + u64::from(u32::from_be_bytes(prefix));
     require(size as u64 <= length - payload_offset, "Truncated Blob")?;
     require(
-        index == 0 || kind != b"OSMHeader",
+        index == 0 || kind != BlockKind::Header,
         "Unexpected second OSMHeader",
     )?;
     Ok(Some(Descriptor {
@@ -645,7 +660,7 @@ impl PbfBlock<'_> {
                 Ok(())
             })?;
         }
-        let mut dense: [Vec<Field<'_>>; 10] = std::array::from_fn(|_| Vec::new());
+        let mut dense: [Fields<'_>; 10] = std::array::from_fn(|_| Fields::default());
         for (group_index, range) in self.scratch.groups.iter().enumerate() {
             let columns = &mut self.scratch.columns;
             columns.clear();
@@ -841,7 +856,7 @@ impl PbfReader {
     fn from_file(mut file: File) -> Result<Self> {
         let length = file.metadata()?.len();
         let d = descriptor(&mut file, 0, 0, length)?.ok_or(Error::Invalid("Empty PBF file"))?;
-        require(d.kind == b"OSMHeader", "Missing initial OSMHeader")?;
+        require(d.kind == BlockKind::Header, "Missing initial OSMHeader")?;
         let mut scratch = Scratch::default();
         let mut compressed = Vec::new();
         read_payload(&mut file, &d, &mut compressed)?;
@@ -962,7 +977,7 @@ impl PbfReader {
                 current += 1;
             }
         };
-        require(d.kind == b"OSMData", "Requested block is not OSMData")?;
+        require(d.kind == BlockKind::Data, "Requested block is not OSMData")?;
         #[cfg(feature = "mmap")]
         let mapping = self.mapping.as_deref();
         #[cfg(not(feature = "mmap"))]
@@ -1065,7 +1080,7 @@ impl PbfReader {
                             };
                             *offset = d.payload_offset + d.size as u64;
                             *index += 1;
-                            if d.kind == b"OSMData" {
+                            if d.kind == BlockKind::Data {
                                 if mapping.is_none() {
                                     if sequential {
                                         compressed.resize(d.size, 0);
