@@ -78,3 +78,116 @@ The official ASD-STE100 website was unavailable during this task.
 The document review applied the project writing rules and defined technical terms.
 It could not verify every general word against the complete Issue 9 dictionary.
 Sentence-length checks do not establish full compliance.
+
+## Entity profile implementation review
+
+The independent agent `profile_implementation_review` examined the complete profiling change with fresh context.
+The scope included Rust and C++ consumers, experimental views, allocation accounting, build scripts, comparison scripts, and decoder patches.
+The reviewer also examined the existing Rust and C++ readers.
+Production library source remains unchanged.
+
+Cycle one found one source-supported reporting defect.
+The comparison runner combined summary records when distinct map paths had identical filenames.
+Checksum comparisons used complete paths, so they did not detect this summary error.
+The recorded maps have distinct filenames; the defect did not affect these measurements.
+
+The author confirmed the defect and added argument validation that rejects duplicate map filenames.
+The regression test fails without that guard and passes with it.
+The guard runs before output creation or binary access.
+Cycle two examined the correction and its interactions with the original change.
+The reviewer found no remaining implementation defect in that scope.
+
+## Entity profile validation
+
+The baseline passed 28 test executions and one compile-fail example.
+These include four consumer/view tests in each of two profiling binaries.
+Clippy passed for all targets and features with warnings denied.
+The isolated exact-capacity and fused-decoder variants passed their existing library and consumer tests before measurement.
+The later stage-instrumented variant passed 28 test executions and one compile-fail example.
+
+The main timing sets contain 132 measured processes and 44 warmups.
+They cover Berlin, Romania, Germany, and the planet.
+Counts and complete-consumer checksums match across candidates, worker counts, and repetitions.
+The original ID-consuming workload also passed 16 process comparisons, including warmups.
+Eight stage diagnostics passed worker-record, nested-timer, and checksum checks.
+
+The cache probe passed focused checks for page counts, result bounds, unchanged input contents, and empty-file rejection.
+Python syntax checks, shell syntax checks, and Git whitespace checks passed.
+The source manifest records production source, patch, and profiling-tool hashes.
+The experiment manifests record measured binary hashes.
+
+## Entity profile document review
+
+The same independent reviewer compared the draft profile report with source and recorded regional data.
+It verified workload differences, sampled-function labels, allocation definitions, timing arithmetic, ranges, prototype limits, and local links.
+The author corrected passive sentences, combined instructions, condition placement, imprecise memory rounding, and CPU-affinity wording.
+
+The initial review used source and records only during active measurements.
+It did not run builds, tests, or large-map reads.
+The complete ASD-STE100 Issue 9 dictionary remains unavailable for exhaustive word verification.
+The review applies the project writing rules and technical terms without claiming full dictionary compliance.
+
+Final review found no remaining actionable defect in the profiling tools or report.
+The reviewer verified all 176 main process records, their summaries, counts, checksums, arithmetic, and memory conversions.
+It checked eight stage diagnostics, including worker identities, timer nesting, sums, and derived durations.
+It also verified all 16 original-workload comparisons, source and tool hashes, and local document links.
+
+Independent fixture checks covered four stage runs, the cache probe, and the duplicate-map regression.
+The reviewer found no implementation defect in the stage patch, stage runner, cache probe, or builder changes.
+The author corrected the warmup CPU range and decompressor recommendation wording.
+The reviewer verified both corrections.
+
+The reviewer did not repeat large-map measurements or the complete Rust test suite.
+Full ASD-STE100 dictionary compliance remains unverified.
+
+## Entity implementation review
+
+The independent agent `entity_implementation_review` examined the production changes with fresh context.
+The scope included borrowed views, capacity changes, file scheduling, memory mapping, dependencies, tests, examples, and benchmark tools.
+The reviewer examined lifetimes, malformed inputs, cancellation, resource bounds, and compatibility.
+The source review found no runtime defect.
+
+The reviewer identified imprecise documentation about validation, optional way locations, and platform-specific deferred reads.
+The author confirmed these findings and corrected the descriptions.
+The author also split paragraphs that exceeded the project limit.
+The reviewer checked the corrections and analogous architecture and API comments.
+
+The reviewer identified historical reproduction commands that used the current implementation as the earlier baseline.
+The author added an isolated baseline build from Git revision `fe524f7` and updated those commands.
+The reviewer verified the correction.
+No blocking source finding remains.
+
+During active measurements, the reviewer used source inspection and small result records only.
+It verified all 88 regional and file-cache-eviction processes, all 22 summary rows, checksums, ranges, and document links.
+The reviewer then verified all 24 planet processes, six planet summary rows, arithmetic, memory conversions, and local document links.
+All 112 process records have matching counts and checksums for each map.
+The reviewer verified the recorded source changes after the benchmark build.
+Those changes affect comments, formatting, and the historical builder.
+
+The reviewer independently passed 32 native-backend test executions with mapping enabled and two compile-fail examples.
+It also passed 12 complete-consumer comparisons on an isolated 2.34 MB fixture at 1, 4, and 32 workers.
+That fixture includes unknown blocks larger than the sequential buffer.
+The comparisons covered entity objects, deferred views, sequential views, and mapped views.
+No project input or source map changed during these checks.
+
+The reviewer did not repeat large-map timings, alternate-backend builds, or Windows execution.
+Full ASD-STE100 dictionary compliance remains unverified.
+
+## Entity implementation author validation
+
+The default build and both decompressor configurations with mapping enabled each passed 32 test executions and two compile-fail examples.
+Rust 1.85 passed the same native-backend suite with mapping enabled.
+All-target, all-feature Clippy passed with warnings denied.
+The pure Rust configuration with mapping enabled passed an all-target Windows GNU compilation check.
+No Windows execution environment was available.
+
+The usage example produced identical output with deferred reads, sequential buffering, and memory mapping.
+The historical baseline builder passed its tests and release build.
+Its consumer matched the retained baseline binary on a fixture.
+All three historical patches passed application checks against that baseline.
+The comparison-runner regression, Python syntax checks, formatting checks, and Git whitespace checks passed.
+
+The measurements cover Berlin, Romania, Germany, and the planet with three repetitions for each configuration.
+The experiments contain 84 measured processes and 28 preliminary processes.
+Input sizes and modification times remain unchanged.
+The original C++ repository remains unchanged.

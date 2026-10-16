@@ -1,0 +1,53 @@
+--- a/src/inputosmpbf.rs
++++ b/src/inputosmpbf.rs
+@@ -1000,15 +1000,14 @@
+                         .ok_or(Error::Invalid("Invalid PBF string ID"))
+                 };
+                 let tags = |source: &[TagIds]| -> Result<Vec<Tag<'_>>> {
+-                    source
+-                        .iter()
+-                        .map(|t| {
+-                            Ok(Tag {
+-                                key: string(t.key)?,
+-                                value: string(t.value)?,
+-                            })
+-                        })
+-                        .collect()
++                    let mut result = Vec::with_capacity(source.len());
++                    for t in source {
++                        result.push(Tag {
++                            key: string(t.key)?,
++                            value: string(t.value)?,
++                        });
++                    }
++                    Ok(result)
+                 };
+                 let metadata = |source: &[Metadata],
+                                 index: usize,
+@@ -1064,18 +1063,14 @@
+                     }
+                     GroupBatch::Relations(b) if b.context.count != 0 => {
+                         let all_tags = tags(b.tags.values)?;
+-                        let members: Vec<_> = b
+-                            .member_ids
+-                            .iter()
+-                            .enumerate()
+-                            .map(|(i, &id)| {
+-                                Ok(RelationMember {
+-                                    id,
+-                                    member_type: b.member_types[i],
+-                                    role: string(b.member_roles[i])?,
+-                                })
+-                            })
+-                            .collect::<Result<_>>()?;
++                        let mut members = Vec::with_capacity(b.member_ids.len());
++                        for (i, &id) in b.member_ids.iter().enumerate() {
++                            members.push(RelationMember {
++                                id,
++                                member_type: b.member_types[i],
++                                role: string(b.member_roles[i])?,
++                            });
++                        }
+                         let mut relations = Vec::with_capacity(b.context.count);
+                         for i in 0..b.context.count {
+                             relations.push(Relation {

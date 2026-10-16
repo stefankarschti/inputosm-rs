@@ -5,10 +5,12 @@ pub mod inputosmlog;
 pub mod inputosmpbf;
 mod inputosmxml;
 mod pbfcolumns;
+mod pbfviews;
 pub mod timeutil;
 
 pub use inputosm::*;
-pub use inputosmpbf::{PbfBlock, PbfReader};
+pub use inputosmpbf::{PbfBlock, PbfReadMode, PbfReader};
+pub use pbfviews::*;
 
 /// Callback views cannot escape into caller storage.
 ///

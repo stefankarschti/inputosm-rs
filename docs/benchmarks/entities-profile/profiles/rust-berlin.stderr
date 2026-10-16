@@ -1,0 +1,14 @@
+==3== Callgrind, a call-graph generating cache profiler
+==3== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==3== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==3== Command: target/profile-symbols/release/pbf_benchmark /mnt/maps/berlin-260514.osm.pbf entities 1 1
+==3== 
+==3== For interactive control, run 'callgrind_control -h'.
+==3== brk segment overflow in thread #1: can't grow to 0x4a9b000
+==3== (see section Limitations in user manual)
+==3== NOTE: further instances of this message will not be shown
+==3== 
+==3== Events    : Ir
+==3== Collected : 7033515582
+==3== 
+==3== I   refs:      7,033,515,582

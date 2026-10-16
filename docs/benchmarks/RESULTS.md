@@ -5,6 +5,12 @@ Performance varies by API and thread count.
 The planet entity API takes about 24% more elapsed time in Rust.
 All experiments use three measured runs after warmup.
 
+The later [entity workflow profile](ENTITIES_PROFILE.md) examines CPU costs and experimental performance improvements.
+It includes a consumer that reads tags, coordinates, and references.
+Its workload differs from the ID-consuming entity measurements below.
+That investigation also measured a large planet cache-residency change after a C++ scan.
+Its cache discussion distinguishes warmed scans from scans with incomplete cache residency.
+
 ## Conditions
 
 The tests ran on October 16, 2026, on an AMD Ryzen 9 7950X3D with 32 logical CPUs.

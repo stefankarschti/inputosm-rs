@@ -1,0 +1,60 @@
+{
+  "utc": "2026-10-16T06:09:43Z",
+  "cpu_count": 32,
+  "rounds": 3,
+  "threads": [
+    1,
+    32
+  ],
+  "cache": "No cache clearing. One warmup per candidate, map, and thread count.",
+  "candidates": [
+    {
+      "name": "cpp",
+      "path": "/home/stefan/inputosm-rs/target/entity-profile/cpp",
+      "mode": "entities",
+      "sha256": "2f7a5416aad9e5e360aec427fc5d806bfd4700568c6e350fd7d2d45f14d7ea35"
+    },
+    {
+      "name": "baseline",
+      "path": "/home/stefan/inputosm-rs/target/release/entity_profile",
+      "mode": "entities",
+      "sha256": "a6d06fe9984a1c23e309187e313f94ca049e602a20e58ee336472e7b6373b8d9"
+    },
+    {
+      "name": "views",
+      "path": "/home/stefan/inputosm-rs/target/release/entity_profile",
+      "mode": "views",
+      "sha256": "a6d06fe9984a1c23e309187e313f94ca049e602a20e58ee336472e7b6373b8d9"
+    },
+    {
+      "name": "reserve",
+      "path": "/home/stefan/inputosm-rs/target/entity-profile/variants/reserve/target/release/entity_profile",
+      "mode": "entities",
+      "sha256": "f11650c011fdef878f63e4bb3400817eeb548c3d1852621c9024bbe6b1ccb27e"
+    },
+    {
+      "name": "fused",
+      "path": "/home/stefan/inputosm-rs/target/entity-profile/variants/fused/target/release/entity_profile",
+      "mode": "entities",
+      "sha256": "dc7514dc14736126ebbee206799d9ef5565066da27a612c9b1765d02e4481ddc"
+    },
+    {
+      "name": "fused-views",
+      "path": "/home/stefan/inputosm-rs/target/entity-profile/variants/fused/target/release/entity_profile",
+      "mode": "views",
+      "sha256": "dc7514dc14736126ebbee206799d9ef5565066da27a612c9b1765d02e4481ddc"
+    }
+  ],
+  "maps": [
+    {
+      "path": "/mnt/maps/berlin-260514.osm.pbf",
+      "bytes": 97937692,
+      "mtime_ns": 1778804218000000000
+    },
+    {
+      "path": "/mnt/maps/romania-260701.osm.pbf",
+      "bytes": 323127585,
+      "mtime_ns": 1782949341000000000
+    }
+  ]
+}

@@ -860,3 +860,304 @@ fn utf16_xml() {
     input_file(&file.0, InputOptions::default(), &c).unwrap();
     assert_eq!(c.0.into_inner().unwrap().0, 1);
 }
+
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
+struct EntityRecord {
+    kind: u8,
+    id: i64,
+    coordinates: Option<(i64, i64)>,
+    tags: Vec<(Vec<u8>, Vec<u8>)>,
+    refs: Vec<i64>,
+    members: Vec<(u8, i64, Vec<u8>)>,
+    metadata: String,
+}
+fn owned_tags<'a>(tags: impl Iterator<Item = Tag<'a>>) -> Vec<(Vec<u8>, Vec<u8>)> {
+    tags.map(|t| (t.key.to_vec(), t.value.to_vec())).collect()
+}
+#[derive(Default)]
+struct RecordCollector(Mutex<Vec<EntityRecord>>);
+impl EntityHandler for RecordCollector {
+    fn nodes(&self, _: Context, nodes: &[Node<'_>]) -> Result<()> {
+        self.0
+            .lock()
+            .unwrap()
+            .extend(nodes.iter().map(|n| EntityRecord {
+                kind: 1,
+                id: n.id,
+                coordinates: Some((n.raw_latitude, n.raw_longitude)),
+                tags: owned_tags(n.tags.iter().copied()),
+                refs: vec![],
+                members: vec![],
+                metadata: format!("{:?}", n.metadata),
+            }));
+        Ok(())
+    }
+    fn ways(&self, _: Context, ways: &[Way<'_>]) -> Result<()> {
+        self.0
+            .lock()
+            .unwrap()
+            .extend(ways.iter().map(|w| EntityRecord {
+                kind: 2,
+                id: w.id,
+                coordinates: None,
+                tags: owned_tags(w.tags.iter().copied()),
+                refs: w.node_refs.to_vec(),
+                members: vec![],
+                metadata: format!("{:?}", w.metadata),
+            }));
+        Ok(())
+    }
+    fn relations(&self, _: Context, relations: &[Relation<'_>]) -> Result<()> {
+        self.0.lock().unwrap().extend(relations.iter().map(|r| {
+            EntityRecord {
+                kind: 3,
+                id: r.id,
+                coordinates: None,
+                tags: owned_tags(r.tags.iter().copied()),
+                refs: vec![],
+                members: r
+                    .members
+                    .iter()
+                    .map(|m| (m.member_type as u8, m.id, m.role.to_vec()))
+                    .collect(),
+                metadata: format!("{:?}", r.metadata),
+            }
+        }));
+        Ok(())
+    }
+}
+fn view_records(
+    group: EntityViews<'_>,
+    records: &mut Vec<EntityRecord>,
+    decode_metadata: bool,
+) -> Result<()> {
+    let checked_metadata = |m: Option<Metadata>| {
+        assert_eq!(m.is_some(), decode_metadata);
+        format!("{:?}", m.unwrap_or_default())
+    };
+    match group {
+        EntityViews::Nodes(nodes) => {
+            assert!(nodes.get(nodes.len()).is_none());
+            assert!(nodes.get(usize::MAX).is_none());
+            for n in nodes.iter() {
+                n.user()?;
+                records.push(EntityRecord {
+                    kind: 1,
+                    id: n.id(),
+                    coordinates: Some(n.coordinates()?),
+                    tags: owned_tags(n.tags().collect::<Result<Vec<_>>>()?.into_iter()),
+                    refs: vec![],
+                    members: vec![],
+                    metadata: checked_metadata(n.metadata()?),
+                });
+            }
+        }
+        EntityViews::Ways(ways) => {
+            assert!(ways.get(ways.len()).is_none());
+            for w in ways.iter() {
+                w.user()?;
+                records.push(EntityRecord {
+                    kind: 2,
+                    id: w.id(),
+                    coordinates: None,
+                    tags: owned_tags(w.tags().collect::<Result<Vec<_>>>()?.into_iter()),
+                    refs: w.node_refs().to_vec(),
+                    members: vec![],
+                    metadata: checked_metadata(w.metadata()?),
+                });
+            }
+        }
+        EntityViews::Relations(relations) => {
+            assert!(relations.get(relations.len()).is_none());
+            for r in relations.iter() {
+                r.user()?;
+                records.push(EntityRecord {
+                    kind: 3,
+                    id: r.id(),
+                    coordinates: None,
+                    tags: owned_tags(r.tags().collect::<Result<Vec<_>>>()?.into_iter()),
+                    refs: vec![],
+                    members: r
+                        .members()
+                        .map(|m| m.map(|m| (m.member_type as u8, m.id, m.role.to_vec())))
+                        .collect::<Result<_>>()?,
+                    metadata: checked_metadata(r.metadata()?),
+                });
+            }
+        }
+        EntityViews::Empty(_) => {}
+    }
+    Ok(())
+}
+fn io_readers(path: &Path) -> Vec<PbfReader> {
+    let mut sequential = PbfReader::open(path).unwrap();
+    sequential.set_read_mode(PbfReadMode::Sequential);
+    let mut readers = vec![PbfReader::open(path).unwrap(), sequential];
+    #[cfg(feature = "mmap")]
+    // SAFETY: Tests leave these files unchanged until all readers drop.
+    readers.push(unsafe { PbfReader::open_mmap(path).unwrap() });
+    let _ = &mut readers;
+    readers
+}
+#[test]
+fn public_views_match_complete_entities_in_all_read_modes() {
+    let custom = Temp::pbf(&selected_payload());
+    for path in [
+        fixture("ordinary.osm.pbf"),
+        fixture("comprehensive.osm.pbf"),
+        custom.0.clone(),
+    ] {
+        for decode_metadata in [false, true] {
+            let collector = RecordCollector::default();
+            input_file(
+                &path,
+                InputOptions {
+                    decode_metadata,
+                    threads: 1,
+                },
+                &collector,
+            )
+            .unwrap();
+            let mut expected = collector.0.into_inner().unwrap();
+            expected.sort();
+            for mut reader in io_readers(&path) {
+                for threads in [1, 4] {
+                    reader.set_thread_count(threads);
+                    let records = Mutex::new(Vec::new());
+                    reader
+                        .read_entity_views(decode_metadata, |context, group| {
+                            assert!(context.thread_index < threads);
+                            assert_eq!(context.block_index, group.context().block_index);
+                            view_records(group, &mut records.lock().unwrap(), decode_metadata)
+                        })
+                        .unwrap();
+                    let mut actual = records.into_inner().unwrap();
+                    actual.sort();
+                    assert_eq!(actual, expected);
+                }
+                reader.build_index().unwrap();
+                for _ in 0..2 {
+                    reader
+                        .read_block(1, |block| {
+                            block.decode_entity_views(decode_metadata, |g| {
+                                view_records(g, &mut Vec::new(), decode_metadata)
+                            })
+                        })
+                        .unwrap();
+                }
+                reader.read_blocks(|block| block.validate()).unwrap();
+            }
+        }
+    }
+}
+#[test]
+fn new_read_modes_preserve_errors_and_cancellation() {
+    let invalid = Temp::bytes(&[header(), blob(b"OSMData", &[0xff])].concat(), "pbf");
+    for mut reader in io_readers(&invalid.0) {
+        reader.read_blocks(|_| Ok(())).unwrap();
+        assert!(reader.read_blocks(|b| b.validate()).is_err());
+    }
+    let truncated = Temp::bytes(&[header(), vec![0, 0, 0, 5, 10]].concat(), "pbf");
+    for mut reader in io_readers(&truncated.0) {
+        assert!(reader.read_blocks(|_| Ok(())).is_err());
+        assert!(reader.build_index().is_err());
+    }
+    let unknown = Temp::bytes(
+        &[
+            header(),
+            block(b"Extension", &[]),
+            block(b"OSMData", &selected_payload()),
+        ]
+        .concat(),
+        "pbf",
+    );
+    for mut reader in io_readers(&unknown.0) {
+        reader.set_thread_count(4);
+        assert!(matches!(
+            reader.read_entity_views(false, |_, _| Err(Error::Cancelled)),
+            Err(Error::Cancelled)
+        ));
+        assert!(matches!(
+            reader.read_blocks(|_| panic!("test panic")),
+            Err(Error::WorkerPanic)
+        ));
+        reader
+            .read_blocks(|b| {
+                assert_eq!(b.index(), 2);
+                b.validate()
+            })
+            .unwrap();
+        reader.build_index().unwrap();
+        assert!(reader.read_block(1, |_| Ok(())).is_err());
+        reader.read_block(2, |b| b.validate()).unwrap();
+    }
+}
+#[test]
+fn view_accessors_check_strings_conversions_and_metadata() {
+    let node = [
+        int(1, zz(1)),
+        int(8, zz(i64::MAX)),
+        int(9, zz(0)),
+        packed(2, &[1]),
+        packed(3, &[9]),
+        msg(4, &[int(2, i64::MAX as u64), int(5, 9)].concat()),
+    ]
+    .concat();
+    let relation = [
+        int(1, 2),
+        packed(8, &[9]),
+        packed(9, &[zz(1)]),
+        packed(10, &[0]),
+    ]
+    .concat();
+    let file = Temp::pbf(
+        &[
+            table(),
+            msg(2, &msg(1, &node)),
+            msg(2, &msg(4, &relation)),
+            int(18, 2000),
+        ]
+        .concat(),
+    );
+    for mut reader in io_readers(&file.0) {
+        reader
+            .read_entity_views(true, |_, group| {
+                match group {
+                    EntityViews::Nodes(nodes) => {
+                        let n = nodes.get(0).unwrap();
+                        assert_eq!(n.id(), 1);
+                        assert!(n.coordinates().is_err());
+                        assert!(n.tags().next().unwrap().is_err());
+                        assert!(n.metadata().is_err());
+                        assert!(n.user().is_err());
+                    }
+                    EntityViews::Relations(relations) => {
+                        assert!(relations.get(0).unwrap().members().next().unwrap().is_err());
+                    }
+                    _ => panic!("unexpected group"),
+                }
+                Ok(())
+            })
+            .unwrap();
+        reader
+            .read_entity_views(false, |_, group| {
+                if let EntityViews::Nodes(nodes) = group {
+                    let n = nodes.get(0).unwrap();
+                    assert_eq!(n.metadata()?, None);
+                    assert_eq!(n.user()?, None);
+                }
+                Ok(())
+            })
+            .unwrap();
+    }
+    let file = Temp::pbf(&selected_payload());
+    PbfReader::open(&file.0)
+        .unwrap()
+        .read_entity_views(true, |_, group| {
+            if let EntityViews::Nodes(nodes) = group {
+                assert_eq!(nodes.get(0).unwrap().user()?, Some(&b"value"[..]));
+            }
+            Ok(())
+        })
+        .unwrap();
+}

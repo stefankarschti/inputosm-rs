@@ -1,0 +1,164 @@
+[
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 0.063765159,
+    "min_seconds": 0.063691009,
+    "max_seconds": 0.065500358,
+    "median_rss_kib": 184144
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "capacity",
+    "median_seconds": 0.056857083,
+    "min_seconds": 0.055428941,
+    "max_seconds": 0.058205947,
+    "median_rss_kib": 198528
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 0.046935809,
+    "min_seconds": 0.046698643,
+    "max_seconds": 0.048248424,
+    "median_rss_kib": 86272
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "sequential",
+    "median_seconds": 0.062707562,
+    "min_seconds": 0.059673653,
+    "max_seconds": 0.063640574,
+    "median_rss_kib": 94880
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "mapped",
+    "median_seconds": 0.047544511,
+    "min_seconds": 0.047154219,
+    "max_seconds": 0.048723215,
+    "median_rss_kib": 162304
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 0.065669175,
+    "min_seconds": 0.065622437,
+    "max_seconds": 0.06770004,
+    "median_rss_kib": 272196
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 0.123646231,
+    "min_seconds": 0.122526398,
+    "max_seconds": 0.12755333,
+    "median_rss_kib": 310528
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "capacity",
+    "median_seconds": 0.12119615,
+    "min_seconds": 0.12018467,
+    "max_seconds": 0.124442026,
+    "median_rss_kib": 284584
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 0.109662987,
+    "min_seconds": 0.10816303,
+    "max_seconds": 0.113445842,
+    "median_rss_kib": 233056
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "sequential",
+    "median_seconds": 0.171704408,
+    "min_seconds": 0.167192884,
+    "max_seconds": 0.174281749,
+    "median_rss_kib": 231820
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "mapped",
+    "median_seconds": 0.12049849,
+    "min_seconds": 0.116273283,
+    "max_seconds": 0.120618836,
+    "median_rss_kib": 519280
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 0.130495987,
+    "min_seconds": 0.129359121,
+    "max_seconds": 0.133699283,
+    "median_rss_kib": 653920
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 1.575109661,
+    "min_seconds": 1.573557695,
+    "max_seconds": 1.582821489,
+    "median_rss_kib": 718604
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "capacity",
+    "median_seconds": 1.582462234,
+    "min_seconds": 1.524011284,
+    "max_seconds": 1.597053882,
+    "median_rss_kib": 662244
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 1.423485436,
+    "min_seconds": 1.334166646,
+    "max_seconds": 1.5755065,
+    "median_rss_kib": 320428
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "sequential",
+    "median_seconds": 2.355479399,
+    "min_seconds": 2.288144394,
+    "max_seconds": 2.917229899,
+    "median_rss_kib": 311280
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "mapped",
+    "median_seconds": 1.656603453,
+    "min_seconds": 1.575816789,
+    "max_seconds": 1.674789133,
+    "median_rss_kib": 5005184
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 1.616813232,
+    "min_seconds": 1.548043979,
+    "max_seconds": 1.707709136,
+    "median_rss_kib": 5416132
+  }
+]

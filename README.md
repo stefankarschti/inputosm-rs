@@ -83,6 +83,72 @@ The library has no global parser state.
 Set `InputOptions.threads` for parallel PBF entity reads.
 XML and OSC callbacks execute sequentially.
 
+## Read PBF entity views
+
+`read_entity_views()` avoids construction of entity, tag, and member arrays.
+The callback can read IDs, coordinates, tags, references, and members through borrowed accessors.
+The boolean argument selects metadata decoding.
+This interface supports PBF files.
+
+```rust
+use inputosm::{EntityViews, PbfReader, Result};
+
+fn main() -> Result<()> {
+    let mut reader = PbfReader::open("map.osm.pbf")?;
+    reader.set_max_thread_count();
+    reader.read_entity_views(false, |_, group| {
+        if let EntityViews::Nodes(nodes) = group {
+            for node in nodes.iter() {
+                let (latitude, longitude) = node.coordinates()?;
+                for tag in node.tags() {
+                    let tag = tag?;
+                    println!("{} {latitude} {longitude} {:?}", node.id(), tag);
+                }
+            }
+        }
+        Ok(())
+    })
+}
+```
+
+View coordinates use units of 100 nanodegrees.
+`metadata()` returns `None` when metadata decoding is disabled.
+Otherwise, it returns metadata with timestamps in seconds.
+`user()` resolves the optional username.
+
+String and conversion errors occur when accessors read those fields.
+Unaccessed values can remain unchecked.
+Use block validation for encoded-field and string-reference validation.
+Accessors still check normalized coordinate and timestamp overflow after block validation.
+Views omit optional way locations; use the column API for those values.
+
+## File access modes
+
+`PbfReader::open()` uses safe file reads.
+On Unix, its default mode defers payload access until a callback requests decoded data.
+Other platforms read payloads before callbacks.
+For sequential buffering, call `reader.set_read_mode(inputosm::PbfReadMode::Sequential)`.
+This mode reads each compressed data block before its callback and uses a one-MiB shared buffer.
+
+Sequential mode does not change indexed reads or decompression timing.
+It can help large sequential scans, but it can slow cached scans.
+
+Enable `mmap` to use `PbfReader::open_mmap()`.
+This optional feature adds the `memmap2` dependency.
+
+```sh
+cargo build --release --features mmap
+```
+
+The mapping constructor is unsafe.
+The caller must prevent changes to the backing file until the reader drops.
+This includes writes and truncation through other handles or processes.
+The operating system loads mapped pages as necessary.
+Memory mapping does not load the complete file into the Rust heap.
+Mapped readers ignore `PbfReadMode` and borrow compressed payloads directly.
+
+The [usage example](examples/entity_views.rs) shows both file access methods.
+
 ## Data contracts
 
 - Callback slices remain valid only during their callback.
@@ -142,7 +208,7 @@ It rejects unsupported encoding declarations.
 Malformed integers and coordinates return errors.
 The metadata option applies consistently to XML and PBF.
 
-The Rust reader uses bounded file reads instead of memory mapping.
+The Rust reader defaults to bounded file reads and offers optional memory mapping.
 Separate readers own separate indexes.
 The C++ reader can share mappings and indexes across readers.
 These differences affect random-access performance and memory measurements.
@@ -155,6 +221,7 @@ These differences affect random-access performance and memory measurements.
 - [Review record](docs/development/REVIEW.md)
 - [Benchmark procedure](docs/benchmarks/PROCEDURE.md)
 - [Benchmark results](docs/benchmarks/RESULTS.md)
+- [Entity implementation measurements](docs/benchmarks/ENTITY_IMPLEMENTATION.md)
 - [Project instructions](AGENTS.md)
 
 The original source and this port use the Apache-2.0 license.

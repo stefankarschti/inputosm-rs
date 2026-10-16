@@ -1,0 +1,2090 @@
+[
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.131706712",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 0.79,
+    "system_seconds": 0.22,
+    "max_rss_kib": 297176,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.048561271",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.05,
+    "user_seconds": 0.8,
+    "system_seconds": 0.1,
+    "max_rss_kib": 162428,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.059376184",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.78,
+    "system_seconds": 0.08,
+    "max_rss_kib": 94868,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.046189727",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.04,
+    "user_seconds": 0.82,
+    "system_seconds": 0.1,
+    "max_rss_kib": 86528,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.057940729",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.93,
+    "system_seconds": 0.24,
+    "max_rss_kib": 198436,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.062577117",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.98,
+    "system_seconds": 0.23,
+    "max_rss_kib": 186480,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.055428941",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.93,
+    "system_seconds": 0.19,
+    "max_rss_kib": 209772,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.046698643",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.04,
+    "user_seconds": 0.81,
+    "system_seconds": 0.11,
+    "max_rss_kib": 87296,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.063640574",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.78,
+    "system_seconds": 0.09,
+    "max_rss_kib": 94424,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.047544511",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.05,
+    "user_seconds": 0.84,
+    "system_seconds": 0.07,
+    "max_rss_kib": 161536,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.067700040",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.87,
+    "system_seconds": 0.23,
+    "max_rss_kib": 272196,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.063691009",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.95,
+    "system_seconds": 0.23,
+    "max_rss_kib": 181348,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.056857083",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.89,
+    "system_seconds": 0.24,
+    "max_rss_kib": 191036,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.063765159",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.96,
+    "system_seconds": 0.25,
+    "max_rss_kib": 186992,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.065622437",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.84,
+    "system_seconds": 0.23,
+    "max_rss_kib": 268432,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.048723215",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.05,
+    "user_seconds": 0.83,
+    "system_seconds": 0.09,
+    "max_rss_kib": 163784,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.059673653",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.77,
+    "system_seconds": 0.08,
+    "max_rss_kib": 94880,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.046935809",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.04,
+    "user_seconds": 0.83,
+    "system_seconds": 0.1,
+    "max_rss_kib": 85740,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.062707562",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.06,
+    "user_seconds": 0.75,
+    "system_seconds": 0.12,
+    "max_rss_kib": 95488,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.047154219",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.05,
+    "user_seconds": 0.84,
+    "system_seconds": 0.07,
+    "max_rss_kib": 162304,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.065669175",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.88,
+    "system_seconds": 0.24,
+    "max_rss_kib": 286412,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.065500358",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.96,
+    "system_seconds": 0.23,
+    "max_rss_kib": 184144,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.058205947",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.07,
+    "user_seconds": 0.88,
+    "system_seconds": 0.24,
+    "max_rss_kib": 198528,
+    "stderr": ""
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/berlin-260514.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.048248424",
+      "nodes": "7828609",
+      "ways": "1321857",
+      "relations": "18068",
+      "checksum": "3760531941962651882",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.05,
+    "user_seconds": 0.84,
+    "system_seconds": 0.09,
+    "max_rss_kib": 86272,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.339046963",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.36,
+    "user_seconds": 2.08,
+    "system_seconds": 0.47,
+    "max_rss_kib": 684676,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.117671520",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.12,
+    "user_seconds": 2.48,
+    "system_seconds": 0.22,
+    "max_rss_kib": 518788,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.177367354",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.18,
+    "user_seconds": 2.32,
+    "system_seconds": 0.25,
+    "max_rss_kib": 232600,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.108829162",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.11,
+    "user_seconds": 2.49,
+    "system_seconds": 0.3,
+    "max_rss_kib": 226536,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.119574263",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.13,
+    "user_seconds": 2.81,
+    "system_seconds": 0.38,
+    "max_rss_kib": 285732,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.124867465",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 2.9,
+    "system_seconds": 0.44,
+    "max_rss_kib": 315316,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.120184670",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.13,
+    "user_seconds": 2.74,
+    "system_seconds": 0.41,
+    "max_rss_kib": 282220,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.108163030",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.11,
+    "user_seconds": 2.52,
+    "system_seconds": 0.3,
+    "max_rss_kib": 230000,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.174281749",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.18,
+    "user_seconds": 2.36,
+    "system_seconds": 0.22,
+    "max_rss_kib": 234144,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.120618836",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.12,
+    "user_seconds": 2.51,
+    "system_seconds": 0.22,
+    "max_rss_kib": 516640,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.129359121",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.15,
+    "user_seconds": 2.42,
+    "system_seconds": 0.44,
+    "max_rss_kib": 667992,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.123646231",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 2.9,
+    "system_seconds": 0.44,
+    "max_rss_kib": 307040,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.121196150",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.13,
+    "user_seconds": 2.76,
+    "system_seconds": 0.41,
+    "max_rss_kib": 286144,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.127553330",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 2.86,
+    "system_seconds": 0.44,
+    "max_rss_kib": 317608,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.133699283",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.15,
+    "user_seconds": 2.41,
+    "system_seconds": 0.5,
+    "max_rss_kib": 652248,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.116273283",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.12,
+    "user_seconds": 2.51,
+    "system_seconds": 0.2,
+    "max_rss_kib": 519280,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.171704408",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.17,
+    "user_seconds": 2.32,
+    "system_seconds": 0.26,
+    "max_rss_kib": 231820,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.113445842",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.12,
+    "user_seconds": 2.52,
+    "system_seconds": 0.29,
+    "max_rss_kib": 233380,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "0.167192884",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.17,
+    "user_seconds": 2.33,
+    "system_seconds": 0.26,
+    "max_rss_kib": 227800,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "0.120498490",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.12,
+    "user_seconds": 2.56,
+    "system_seconds": 0.2,
+    "max_rss_kib": 519652,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.130495987",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 0.15,
+    "user_seconds": 2.49,
+    "system_seconds": 0.43,
+    "max_rss_kib": 653920,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.122526398",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 2.85,
+    "system_seconds": 0.44,
+    "max_rss_kib": 310528,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "0.124442026",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.14,
+    "user_seconds": 2.84,
+    "system_seconds": 0.4,
+    "max_rss_kib": 284584,
+    "stderr": ""
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "0.109662987",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 0.11,
+    "user_seconds": 2.55,
+    "system_seconds": 0.28,
+    "max_rss_kib": 233056,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "5.171472049",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 5.2,
+    "user_seconds": 32.41,
+    "system_seconds": 4.09,
+    "max_rss_kib": 5515952,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "1.674838083",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.68,
+    "user_seconds": 38.29,
+    "system_seconds": 1.15,
+    "max_rss_kib": 5006044,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "2.225041504",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 2.23,
+    "user_seconds": 36.75,
+    "system_seconds": 1.6,
+    "max_rss_kib": 323432,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "1.375190572",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.38,
+    "user_seconds": 38.76,
+    "system_seconds": 1.41,
+    "max_rss_kib": 315780,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.689986855",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.73,
+    "user_seconds": 42.31,
+    "system_seconds": 2.57,
+    "max_rss_kib": 628844,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.572748949",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.6,
+    "user_seconds": 43.77,
+    "system_seconds": 2.8,
+    "max_rss_kib": 676640,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.582462234",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.63,
+    "user_seconds": 42.33,
+    "system_seconds": 2.7,
+    "max_rss_kib": 664304,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "1.334166646",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.34,
+    "user_seconds": 38.81,
+    "system_seconds": 1.48,
+    "max_rss_kib": 320428,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "2.288144394",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 2.29,
+    "user_seconds": 36.74,
+    "system_seconds": 1.71,
+    "max_rss_kib": 313096,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "1.575816789",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.58,
+    "user_seconds": 38.56,
+    "system_seconds": 1.2,
+    "max_rss_kib": 5006060,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.616813232",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 1.64,
+    "user_seconds": 36.85,
+    "system_seconds": 1.77,
+    "max_rss_kib": 5416132,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.575109661",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.61,
+    "user_seconds": 43.77,
+    "system_seconds": 2.74,
+    "max_rss_kib": 704640,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.524011284",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.57,
+    "user_seconds": 42.26,
+    "system_seconds": 2.45,
+    "max_rss_kib": 662244,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.573557695",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.61,
+    "user_seconds": 43.85,
+    "system_seconds": 2.79,
+    "max_rss_kib": 718604,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.707709136",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 1.73,
+    "user_seconds": 37.25,
+    "system_seconds": 2.01,
+    "max_rss_kib": 5400724,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "1.674789133",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.68,
+    "user_seconds": 38.68,
+    "system_seconds": 1.07,
+    "max_rss_kib": 4992628,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "2.917229899",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 2.92,
+    "user_seconds": 37.94,
+    "system_seconds": 1.76,
+    "max_rss_kib": 311280,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "1.423485436",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.43,
+    "user_seconds": 38.82,
+    "system_seconds": 1.54,
+    "max_rss_kib": 312324,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "2.355479399",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 2.36,
+    "user_seconds": 36.6,
+    "system_seconds": 1.73,
+    "max_rss_kib": 310108,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "1.656603453",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.66,
+    "user_seconds": 38.67,
+    "system_seconds": 1.25,
+    "max_rss_kib": 5005184,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.548043979",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 1.57,
+    "user_seconds": 37.12,
+    "system_seconds": 1.92,
+    "max_rss_kib": 5433108,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.582821489",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.62,
+    "user_seconds": 43.95,
+    "system_seconds": 2.77,
+    "max_rss_kib": 727316,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "1.597053882",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.64,
+    "user_seconds": 42.03,
+    "system_seconds": 2.42,
+    "max_rss_kib": 629560,
+    "stderr": ""
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "1.575506500",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 1.58,
+    "user_seconds": 38.74,
+    "system_seconds": 1.54,
+    "max_rss_kib": 323560,
+    "stderr": ""
+  }
+]

@@ -73,3 +73,25 @@ Use `--no-default-features --features rust-zlib` to avoid the native backend.
 
 The current default follows measured performance.
 The alternative remains available for builds without a C compiler.
+
+The optional `mmap` feature adds `memmap2` for file memory mappings.
+On Unix, that crate uses `libc` for operating-system calls.
+An unsafe constructor exposes the unchanged-file requirement to the application.
+`unsafe` does not disable Rust checks throughout the reader.
+It records a condition that the compiler cannot verify across external file writers.
+
+## Entity views and file access
+
+Borrowed strings avoid copies of string contents.
+They do not prevent allocation of arrays that contain string references.
+The existing entity adapter still constructs those arrays.
+The new PBF views avoid them and access the decoded columns directly.
+
+`Result` iterators can return an error for an individual tag or member.
+Use `?` on each iterator item before reading its fields.
+View metadata and coordinate accessors also use `Result` for checked conversions.
+
+Sequential buffering combines small file reads into larger reads.
+Memory mapping lets the operating system supply file pages through virtual memory.
+Both approaches depend on cache residency and storage performance.
+Use the [implementation measurements](../benchmarks/ENTITY_IMPLEMENTATION.md) to compare their behavior on this host.

@@ -1,0 +1,218 @@
+[
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "cpp",
+    "median_seconds": 0.629011366,
+    "min_seconds": 0.60003883,
+    "max_seconds": 0.681180627,
+    "median_rss_kib": 127004
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "baseline",
+    "median_seconds": 0.701175107,
+    "min_seconds": 0.655786564,
+    "max_seconds": 0.848043753,
+    "median_rss_kib": 33760
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "views",
+    "median_seconds": 0.708715021,
+    "min_seconds": 0.577342154,
+    "max_seconds": 0.749443741,
+    "median_rss_kib": 15104
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "reserve",
+    "median_seconds": 0.803624471,
+    "min_seconds": 0.680338374,
+    "max_seconds": 0.82029178,
+    "median_rss_kib": 33780
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "fused",
+    "median_seconds": 0.76707965,
+    "min_seconds": 0.639519526,
+    "max_seconds": 0.836216255,
+    "median_rss_kib": 33784
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "candidate": "fused-views",
+    "median_seconds": 0.595712252,
+    "min_seconds": 0.571471045,
+    "max_seconds": 0.676222633,
+    "median_rss_kib": 15104
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 0.069714861,
+    "min_seconds": 0.067692333,
+    "max_seconds": 0.08302796,
+    "median_rss_kib": 279028
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 0.067017714,
+    "min_seconds": 0.065474927,
+    "max_seconds": 0.067326245,
+    "median_rss_kib": 181588
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 0.046075945,
+    "min_seconds": 0.0451315,
+    "max_seconds": 0.050188,
+    "median_rss_kib": 86016
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "reserve",
+    "median_seconds": 0.058239815,
+    "min_seconds": 0.058071088,
+    "max_seconds": 0.06875075,
+    "median_rss_kib": 187600
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "fused",
+    "median_seconds": 0.065321489,
+    "min_seconds": 0.064626452,
+    "max_seconds": 0.073991615,
+    "median_rss_kib": 187620
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "candidate": "fused-views",
+    "median_seconds": 0.04598839,
+    "min_seconds": 0.045198938,
+    "max_seconds": 0.057039781,
+    "median_rss_kib": 85504
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "cpp",
+    "median_seconds": 1.804592595,
+    "min_seconds": 1.652214895,
+    "max_seconds": 1.947852189,
+    "median_rss_kib": 354168
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "baseline",
+    "median_seconds": 1.833972842,
+    "min_seconds": 1.831881056,
+    "max_seconds": 1.942346306,
+    "median_rss_kib": 37156
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "views",
+    "median_seconds": 1.645150478,
+    "min_seconds": 1.63780757,
+    "max_seconds": 1.680180621,
+    "median_rss_kib": 23184
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "reserve",
+    "median_seconds": 1.79785128,
+    "min_seconds": 1.797072524,
+    "max_seconds": 1.833681958,
+    "median_rss_kib": 32608
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "fused",
+    "median_seconds": 1.809622071,
+    "min_seconds": 1.806291332,
+    "max_seconds": 1.877205849,
+    "median_rss_kib": 36924
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "candidate": "fused-views",
+    "median_seconds": 1.681848816,
+    "min_seconds": 1.600310932,
+    "max_seconds": 1.910061519,
+    "median_rss_kib": 23716
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 0.125454911,
+    "min_seconds": 0.124833464,
+    "max_seconds": 0.136325372,
+    "median_rss_kib": 654140
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 0.122115277,
+    "min_seconds": 0.121187896,
+    "max_seconds": 0.124819588,
+    "median_rss_kib": 313528
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 0.10412885,
+    "min_seconds": 0.103757221,
+    "max_seconds": 0.104910258,
+    "median_rss_kib": 232420
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "reserve",
+    "median_seconds": 0.116960704,
+    "min_seconds": 0.116747073,
+    "max_seconds": 0.132032567,
+    "median_rss_kib": 285664
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "fused",
+    "median_seconds": 0.121542401,
+    "min_seconds": 0.120553864,
+    "max_seconds": 0.125291424,
+    "median_rss_kib": 313528
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "candidate": "fused-views",
+    "median_seconds": 0.102600669,
+    "min_seconds": 0.10259617,
+    "max_seconds": 0.102992224,
+    "median_rss_kib": 233060
+  }
+]

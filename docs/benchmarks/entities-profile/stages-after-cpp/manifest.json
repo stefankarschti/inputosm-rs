@@ -1,0 +1,21 @@
+{
+  "binary": "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+  "sha256": "8abacf10672cd3877815147135aac06d75f09b0db5caf7e869879b4e655ae969",
+  "raw_fields_nanoseconds": [
+    "lock_wait",
+    "framing",
+    "payload_read",
+    "blob_decode",
+    "decode_total",
+    "strings",
+    "group_consumer",
+    "entity_handler"
+  ],
+  "cases": [
+    {
+      "path": "/mnt/maps/planet-260907.osm.pbf",
+      "threads": 32,
+      "bytes": 94746421723
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 33.449934989,
+    "min_seconds": 33.156289605,
+    "max_seconds": 34.048692217,
+    "median_rss_kib": 695480
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "capacity",
+    "median_seconds": 32.061798656,
+    "min_seconds": 31.815332508,
+    "max_seconds": 33.420118513,
+    "median_rss_kib": 741268
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 27.150079739,
+    "min_seconds": 26.964003458,
+    "max_seconds": 27.247071578,
+    "median_rss_kib": 620644
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "sequential",
+    "median_seconds": 35.420680877,
+    "min_seconds": 33.158708286,
+    "max_seconds": 35.553996817,
+    "median_rss_kib": 638868
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "mapped",
+    "median_seconds": 29.365082211,
+    "min_seconds": 29.289994642,
+    "max_seconds": 30.25574192,
+    "median_rss_kib": 93033456
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 28.748434043,
+    "min_seconds": 28.140779131,
+    "max_seconds": 28.993960833,
+    "median_rss_kib": 93408268
+  }
+]

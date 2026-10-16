@@ -1,0 +1,212 @@
+[
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "mode": "entities",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "entities",
+      "1"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "1",
+      "seconds": "1.771095202",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 0.000116589,
+      "framing": 0.012056141,
+      "payload_read": 0.098245929,
+      "blob_decode": 0.660407109,
+      "decode_total": 0.998087082,
+      "strings": 0.006308556,
+      "group_consumer": 0.470701333,
+      "entity_handler": 0.199184174,
+      "columns_and_decode_overhead": 0.521077193,
+      "adapter": 0.271517159
+    }
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "mode": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/romania-260701.osm.pbf",
+      "views",
+      "1"
+    ],
+    "csv": {
+      "mode": "views",
+      "threads": "1",
+      "seconds": "1.513690108",
+      "nodes": "40101568",
+      "ways": "4169405",
+      "relations": "66761",
+      "checksum": "10513922596698891279",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 0.000116417,
+      "framing": 0.010344374,
+      "payload_read": 0.037622452,
+      "blob_decode": 0.657917389,
+      "decode_total": 0.805593402,
+      "strings": 0.007490316,
+      "group_consumer": 0.281841443,
+      "entity_handler": 0.0,
+      "columns_and_decode_overhead": 0.5162616429999999,
+      "adapter": 0
+    }
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "mode": "entities",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "7.190905138",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 142.35811195,
+      "framing": 6.589825928,
+      "payload_read": 39.850290792,
+      "blob_decode": 13.309757649,
+      "decode_total": 27.350884484,
+      "strings": 0.407889434,
+      "group_consumer": 14.453681847,
+      "entity_handler": 4.709520364,
+      "columns_and_decode_overhead": 12.489313203,
+      "adapter": 9.744161483
+    }
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "mode": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/germany-260925.osm.pbf",
+      "views",
+      "32"
+    ],
+    "csv": {
+      "mode": "views",
+      "threads": "32",
+      "seconds": "1.232111552",
+      "nodes": "440211917",
+      "ways": "71159227",
+      "relations": "910710",
+      "checksum": "14721684296615005453",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 0.834405593,
+      "framing": 0.235172583,
+      "payload_read": 0.958629707,
+      "blob_decode": 13.529255785,
+      "decode_total": 23.109463541,
+      "strings": 0.391907837,
+      "group_consumer": 7.937393916,
+      "entity_handler": 0.0,
+      "columns_and_decode_overhead": 14.780161787999997,
+      "adapter": 0
+    }
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "mode": "entities",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "56.025858120",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 782.519896331,
+      "framing": 44.458159772,
+      "payload_read": 256.090401232,
+      "blob_decode": 278.673213532,
+      "decode_total": 429.922136291,
+      "strings": 4.559152158,
+      "group_consumer": 210.544729715,
+      "entity_handler": 78.943872419,
+      "columns_and_decode_overhead": 214.818254418,
+      "adapter": 131.600857296
+    }
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "mode": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "views",
+      "32"
+    ],
+    "csv": {
+      "mode": "views",
+      "threads": "32",
+      "seconds": "67.085721151",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 1203.353188664,
+      "framing": 60.43285463,
+      "payload_read": 335.952956091,
+      "blob_decode": 242.917942554,
+      "decode_total": 302.831746433,
+      "strings": 3.722866577,
+      "group_consumer": 97.584461814,
+      "entity_handler": 0.0,
+      "columns_and_decode_overhead": 201.52441804199998,
+      "adapter": 0
+    }
+  }
+]

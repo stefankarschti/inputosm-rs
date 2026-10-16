@@ -1,0 +1,24 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cycles:u'
+# Event count (approx.): 23780029412
+#
+# Overhead  Command        Shared Object         Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+# ........  .............  ....................  .................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+    41.81%  pbf_benchmark  pbf_benchmark         [.] deflate_decompress_bmi2
+    16.44%  pbf_benchmark  pbf_benchmark         [.] _RNCINvMs2_NtCsiQhszSylU9c_8inputosm11inputosmpbfNtB8_9PbfReader11read_blocksNCINvB8_9input_pbfNtNvCs5ykgM9Ul3za_13pbf_benchmark3run7HandlerE0E0B1y_
+    16.03%  pbf_benchmark  pbf_benchmark         [.] _RNvMNtCsiQhszSylU9c_8inputosm10pbfcolumnsNtB2_7Columns8ordinary
+    14.61%  pbf_benchmark  pbf_benchmark         [.] _RNvNvMNtCsiQhszSylU9c_8inputosm10pbfcolumnsNtB4_7Columns5dense6deltas
+     4.57%  pbf_benchmark  pbf_benchmark         [.] _RNvMNtCsiQhszSylU9c_8inputosm10pbfcolumnsNtB2_7Columns5dense
+     2.13%  pbf_benchmark  pbf_benchmark         [.] _RINvNtNtCskADBYZwJmSU_4core4iter8adapters11try_processINtNtB2_3map3MapINtNtNtB6_5slice4iter4IterNtNtCsiQhszSylU9c_8inputosm8inputosm6TagIdsENCNCNCNCINvNtB1A_11inputosmpbf9input_pbfNtNvCs5ykgM9Ul3za_13pbf_benchmark3run7HandlerE00s_00ENtB1y_3TagINtNtB6_6result6ResultNtNtB6_7convert10InfallibleNtB1y_5ErrorENCINvXso_B3W_IB3U_INtNtCsgFX3jaOk65H_5alloc3vec3VecB3J_EB4G_EINtNtNtB4_6traits7collect12FromIteratorIB3U_B3J_B4G_EE9from_iterBQ_E0B5b_EB2W_
+     1.24%  pbf_benchmark  pbf_benchmark         [.] build_decode_table.constprop.1
+     0.99%  pbf_benchmark  pbf_benchmark         [.] _RNvXNvCs5ykgM9Ul3za_13pbf_benchmark3runNtB2_7HandlerNtNtCsiQhszSylU9c_8inputosm8inputosm13EntityHandler5nodes
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

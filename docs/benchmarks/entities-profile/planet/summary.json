@@ -1,0 +1,47 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 28.305432723,
+    "min_seconds": 27.70701131,
+    "max_seconds": 28.788871202,
+    "median_rss_kib": 93412048
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 33.592490643,
+    "min_seconds": 32.666148736,
+    "max_seconds": 36.630751042,
+    "median_rss_kib": 698428
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 24.976010405,
+    "min_seconds": 24.668388487,
+    "max_seconds": 25.249350967,
+    "median_rss_kib": 620236
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "reserve",
+    "median_seconds": 32.05098916,
+    "min_seconds": 31.788796827,
+    "max_seconds": 32.083529641,
+    "median_rss_kib": 739736
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "candidate": "fused-views",
+    "median_seconds": 24.260255853,
+    "min_seconds": 24.130222811,
+    "max_seconds": 24.383805412,
+    "median_rss_kib": 623140
+  }
+]

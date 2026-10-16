@@ -1,0 +1,698 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "80.274126084",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 80.28,
+    "user_seconds": 554.67,
+    "system_seconds": 52.2,
+    "max_rss_kib": 68396724,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "70.203820133",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 70.22,
+    "user_seconds": 619.85,
+    "system_seconds": 44.64,
+    "max_rss_kib": 93026896,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "34.606423663",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 34.62,
+    "user_seconds": 652.68,
+    "system_seconds": 24.59,
+    "max_rss_kib": 639512,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "27.368197304",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 27.38,
+    "user_seconds": 745.56,
+    "system_seconds": 37.99,
+    "max_rss_kib": 631840,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "32.306844350",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 32.33,
+    "user_seconds": 883.44,
+    "system_seconds": 63.02,
+    "max_rss_kib": 748252,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": -1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "33.136497043",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 33.16,
+    "user_seconds": 907.96,
+    "system_seconds": 64.55,
+    "max_rss_kib": 694072,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "32.061798656",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 32.09,
+    "user_seconds": 877.84,
+    "system_seconds": 61.73,
+    "max_rss_kib": 742116,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "26.964003458",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 26.98,
+    "user_seconds": 744.56,
+    "system_seconds": 37.55,
+    "max_rss_kib": 620644,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "35.553996817",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 35.57,
+    "user_seconds": 657.41,
+    "system_seconds": 24.78,
+    "max_rss_kib": 632352,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "29.365082211",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 29.38,
+    "user_seconds": 728.45,
+    "system_seconds": 16.97,
+    "max_rss_kib": 93025580,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "28.140779131",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 28.16,
+    "user_seconds": 698.82,
+    "system_seconds": 20.21,
+    "max_rss_kib": 93408268,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 0,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "34.048692217",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 34.08,
+    "user_seconds": 895.27,
+    "system_seconds": 62.25,
+    "max_rss_kib": 693980,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "33.420118513",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 33.45,
+    "user_seconds": 865.12,
+    "system_seconds": 58.95,
+    "max_rss_kib": 735584,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "33.449934989",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 33.48,
+    "user_seconds": 911.32,
+    "system_seconds": 64.36,
+    "max_rss_kib": 697924,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "28.993960833",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 29.0,
+    "user_seconds": 697.37,
+    "system_seconds": 20.09,
+    "max_rss_kib": 93417812,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "29.289994642",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 29.31,
+    "user_seconds": 727.52,
+    "system_seconds": 17.59,
+    "max_rss_kib": 93040856,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "33.158708286",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 33.18,
+    "user_seconds": 649.3,
+    "system_seconds": 24.76,
+    "max_rss_kib": 653372,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 1,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "27.247071578",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 27.26,
+    "user_seconds": 743.24,
+    "system_seconds": 36.4,
+    "max_rss_kib": 617624,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "sequential",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "sequential-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "sequential-views",
+      "threads": "32",
+      "seconds": "35.420680877",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 35.44,
+    "user_seconds": 655.13,
+    "system_seconds": 24.67,
+    "max_rss_kib": 638868,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "mapped",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "mapped-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "mapped-views",
+      "threads": "32",
+      "seconds": "30.255741920",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 30.27,
+    "user_seconds": 728.37,
+    "system_seconds": 17.25,
+    "max_rss_kib": 93033456,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "cpp",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "28.748434043",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "56",
+      "way_bytes": "56",
+      "relation_bytes": "56"
+    },
+    "process_wall_seconds": 28.76,
+    "user_seconds": 701.17,
+    "system_seconds": 20.16,
+    "max_rss_kib": 93401156,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "baseline",
+    "command": [
+      "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "33.156289605",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 33.19,
+    "user_seconds": 907.52,
+    "system_seconds": 64.03,
+    "max_rss_kib": 695480,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "capacity",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "31.815332508",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 31.84,
+    "user_seconds": 879.21,
+    "system_seconds": 62.39,
+    "max_rss_kib": 741268,
+    "stderr": ""
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "round": 2,
+    "candidate": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "public-views",
+      "32"
+    ],
+    "csv": {
+      "mode": "public-views",
+      "threads": "32",
+      "seconds": "27.150079739",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "process_wall_seconds": 27.17,
+    "user_seconds": 744.17,
+    "system_seconds": 37.93,
+    "max_rss_kib": 633540,
+    "stderr": ""
+  }
+]

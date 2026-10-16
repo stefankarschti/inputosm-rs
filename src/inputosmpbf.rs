@@ -203,7 +203,7 @@ pub(crate) mod wire {
 use crate::pbfcolumns::{Columns, collect_dense};
 use std::{
     fs::File,
-    io::{Read, Seek, SeekFrom},
+    io::{BufReader, Read, Seek, SeekFrom},
     ops::Range,
     path::Path,
     sync::{
@@ -357,6 +357,21 @@ fn descriptor(
         "Truncated Blob prefix",
     )?;
     file.seek(SeekFrom::Start(offset))?;
+    read_descriptor(file, index, offset, length)
+}
+fn read_descriptor(
+    file: &mut impl Read,
+    index: usize,
+    offset: u64,
+    length: u64,
+) -> Result<Option<Descriptor>> {
+    if offset == length {
+        return Ok(None);
+    }
+    require(
+        offset < length && length - offset >= 4,
+        "Truncated Blob prefix",
+    )?;
     let mut prefix = [0; 4];
     file.read_exact(&mut prefix)?;
     let size = u32::from_be_bytes(prefix) as usize;
@@ -395,6 +410,32 @@ fn descriptor(
         kind,
     }))
 }
+#[cfg(feature = "mmap")]
+fn mapped_descriptor(map: &[u8], index: usize, offset: u64) -> Result<Option<Descriptor>> {
+    let start = usize::try_from(offset).map_err(|_| Error::Invalid("PBF offset overflow"))?;
+    let mut bytes = map
+        .get(start..)
+        .ok_or(Error::Invalid("PBF offset out of range"))?;
+    read_descriptor(&mut bytes, index, offset, map.len() as u64)
+}
+
+/// Select payload scheduling for bulk file reads.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum PbfReadMode {
+    /// On Unix, read payloads when callbacks request decoded data. Other platforms read payloads before callbacks.
+    #[default]
+    Deferred,
+    /// Read complete compressed blocks through a bounded sequential buffer.
+    Sequential,
+}
+
+enum BlockSource<'a> {
+    Buffered,
+    #[cfg(unix)]
+    File(&'a File),
+    Slice(&'a [u8]),
+}
+
 fn read_payload(file: &mut File, d: &Descriptor, out: &mut Vec<u8>) -> Result<()> {
     file.seek(SeekFrom::Start(d.payload_offset))?;
     out.resize(d.size, 0);
@@ -453,8 +494,7 @@ fn parse_header(bytes: &[u8]) -> Result<HeaderMetadata> {
 pub struct PbfBlock<'a> {
     descriptor: &'a Descriptor,
     compressed: &'a mut Vec<u8>,
-    #[cfg(unix)]
-    source_file: Option<&'a File>,
+    source: BlockSource<'a>,
     scratch: &'a mut Scratch,
     prepared: bool,
     parameters: Parameters,
@@ -477,13 +517,18 @@ impl PbfBlock<'_> {
         if self.prepared {
             return Ok(());
         }
-        #[cfg(unix)]
-        if let Some(file) = self.source_file {
-            use std::os::unix::fs::FileExt;
-            self.compressed.resize(self.descriptor.size, 0);
-            file.read_exact_at(self.compressed, self.descriptor.payload_offset)?;
-        }
-        blob_data(self.compressed, self.scratch)?;
+        let bytes = match self.source {
+            #[cfg(unix)]
+            BlockSource::File(file) => {
+                use std::os::unix::fs::FileExt;
+                self.compressed.resize(self.descriptor.size, 0);
+                file.read_exact_at(self.compressed, self.descriptor.payload_offset)?;
+                &self.compressed[..]
+            }
+            BlockSource::Buffered => &self.compressed[..],
+            BlockSource::Slice(bytes) => bytes,
+        };
+        blob_data(bytes, self.scratch)?;
         self.scratch.groups.clear();
         self.scratch.tables.clear();
         let raw = &self.scratch.raw;
@@ -642,6 +687,18 @@ impl PbfBlock<'_> {
         }
         Ok(())
     }
+    /// Decode PBF entity fields without constructing entity arrays. Optional way locations require the column API.
+    /// Accessors check string IDs and numeric conversions when the caller reads them.
+    /// Unaccessed values can remain unchecked. Metadata decoding is optional.
+    pub fn decode_entity_views(
+        &mut self,
+        decode_metadata: bool,
+        mut handler: impl FnMut(EntityViews<'_>) -> Result<()>,
+    ) -> Result<()> {
+        self.decode_entities_with_strings(EntityOptions::all(decode_metadata), |group, strings| {
+            handler(EntityViews::new(group, strings))
+        })
+    }
     pub fn decode_nodes(
         &mut self,
         fields: NodeOptions,
@@ -750,6 +807,9 @@ fn visit_strings<'a>(
 /// Own a PBF file and its optional offset index.
 pub struct PbfReader {
     file: File,
+    #[cfg(feature = "mmap")]
+    mapping: Option<memmap2::Mmap>,
+    read_mode: PbfReadMode,
     length: u64,
     header: HeaderMetadata,
     locations_allowed: bool,
@@ -762,7 +822,23 @@ pub struct PbfReader {
 }
 impl PbfReader {
     pub fn open(path: impl AsRef<Path>) -> Result<Self> {
-        let mut file = File::open(path)?;
+        Self::from_file(File::open(path)?)
+    }
+    /// Map a stable PBF file for indexed and bulk reads.
+    ///
+    /// # Safety
+    /// The backing file must remain unchanged until this reader drops.
+    /// This includes writes and truncation through other handles or processes.
+    #[cfg(feature = "mmap")]
+    pub unsafe fn open_mmap(path: impl AsRef<Path>) -> Result<Self> {
+        let file = File::open(path)?;
+        // SAFETY: The caller guarantees an unchanged backing file for this reader's lifetime.
+        let mapping = unsafe { memmap2::MmapOptions::new().map(&file)? };
+        let mut reader = Self::from_file(file)?;
+        reader.mapping = Some(mapping);
+        Ok(reader)
+    }
+    fn from_file(mut file: File) -> Result<Self> {
         let length = file.metadata()?.len();
         let d = descriptor(&mut file, 0, 0, length)?.ok_or(Error::Invalid("Empty PBF file"))?;
         require(d.kind == b"OSMHeader", "Missing initial OSMHeader")?;
@@ -777,6 +853,9 @@ impl PbfReader {
             .any(|s| s == b"LocationsOnWays");
         Ok(Self {
             file,
+            #[cfg(feature = "mmap")]
+            mapping: None,
+            read_mode: PbfReadMode::Deferred,
             length,
             header,
             locations_allowed,
@@ -787,6 +866,30 @@ impl PbfReader {
             log_level: crate::inputosmlog::LogLevel::Info,
             log_callback: None,
         })
+    }
+    /// Set bulk file scheduling. Memory mappings ignore this setting.
+    pub fn set_read_mode(&mut self, mode: PbfReadMode) {
+        self.read_mode = mode;
+    }
+    pub fn read_mode(&self) -> PbfReadMode {
+        self.read_mode
+    }
+    fn mapped_bytes(&self) -> Option<&[u8]> {
+        #[cfg(feature = "mmap")]
+        {
+            self.mapping.as_deref()
+        }
+        #[cfg(not(feature = "mmap"))]
+        {
+            None
+        }
+    }
+    fn descriptor(&mut self, index: usize, offset: u64) -> Result<Option<Descriptor>> {
+        #[cfg(feature = "mmap")]
+        if let Some(map) = &self.mapping {
+            return mapped_descriptor(map, index, offset);
+        }
+        descriptor(&mut self.file, index, offset, self.length)
     }
     pub fn header(&self) -> &HeaderMetadata {
         &self.header
@@ -826,7 +929,7 @@ impl PbfReader {
         }
         let mut offsets = Vec::new();
         let mut offset = 0;
-        while let Some(d) = descriptor(&mut self.file, offsets.len(), offset, self.length)? {
+        while let Some(d) = self.descriptor(offsets.len(), offset)? {
             offsets.push(offset);
             offset = d.payload_offset + d.size as u64;
         }
@@ -843,13 +946,14 @@ impl PbfReader {
             let offset = *offsets
                 .get(index)
                 .ok_or(Error::Invalid("Block index out of range"))?;
-            descriptor(&mut self.file, index, offset, self.length)?
+            self.descriptor(index, offset)?
                 .ok_or(Error::Invalid("Missing indexed block"))?
         } else {
             let mut offset = 0;
             let mut current = 0;
             loop {
-                let d = descriptor(&mut self.file, current, offset, self.length)?
+                let d = self
+                    .descriptor(current, offset)?
                     .ok_or(Error::Invalid("Block index out of range"))?;
                 if current == index {
                     break d;
@@ -859,13 +963,27 @@ impl PbfReader {
             }
         };
         require(d.kind == b"OSMData", "Requested block is not OSMData")?;
-        #[cfg(not(unix))]
-        read_payload(&mut self.file, &d, &mut self.compressed)?;
+        #[cfg(feature = "mmap")]
+        let mapping = self.mapping.as_deref();
+        #[cfg(not(feature = "mmap"))]
+        let mapping: Option<&[u8]> = None;
+        let source = if let Some(map) = mapping {
+            BlockSource::Slice(&map[d.payload_offset as usize..][..d.size])
+        } else {
+            #[cfg(unix)]
+            {
+                BlockSource::File(&self.file)
+            }
+            #[cfg(not(unix))]
+            {
+                read_payload(&mut self.file, &d, &mut self.compressed)?;
+                BlockSource::Buffered
+            }
+        };
         handler(&mut PbfBlock {
             descriptor: &d,
             compressed: &mut self.compressed,
-            #[cfg(unix)]
-            source_file: Some(&self.file),
+            source,
             scratch: &mut self.scratch,
             prepared: false,
             parameters: Parameters::default(),
@@ -873,6 +991,23 @@ impl PbfReader {
             thread_index: 0,
             cached_counts: Counts::default(),
             count_mask: 0,
+        })
+    }
+    /// Read PBF entity views with this reader's current scheduling mode.
+    /// Workers can call the handler concurrently and out of file order.
+    pub fn read_entity_views(
+        &mut self,
+        decode_metadata: bool,
+        handler: impl Fn(Context, EntityViews<'_>) -> Result<()> + Sync,
+    ) -> Result<()> {
+        self.read_blocks(|block| {
+            let context = Context {
+                file_type: FileType::Pbf,
+                mode: Mode::Bulk,
+                block_index: block.index(),
+                thread_index: block.thread_index(),
+            };
+            block.decode_entity_views(decode_metadata, |group| handler(context, group))
         })
     }
     /// Workers can call the handler concurrently and out of file order.
@@ -883,7 +1018,20 @@ impl PbfReader {
         self.log(crate::inputosmlog::LogLevel::Trace, "Start PBF block read");
         #[cfg(unix)]
         let payload_file = self.file.try_clone()?;
-        let state = Mutex::new((&mut self.file, 0u64, 0usize));
+        let mut framing_file = self.file.try_clone()?;
+        framing_file.seek(SeekFrom::Start(0))?;
+        let sequential = self.read_mode == PbfReadMode::Sequential;
+        let mapping = self.mapped_bytes();
+        let capacity = if sequential && mapping.is_none() {
+            1024 * 1024
+        } else {
+            0
+        };
+        let state = Mutex::new((
+            BufReader::with_capacity(capacity, framing_file),
+            0u64,
+            0usize,
+        ));
         let stopped = AtomicBool::new(false);
         let failure = Mutex::new(None);
         let worker = |thread_index| {
@@ -898,15 +1046,39 @@ impl PbfReader {
                         let mut state = state.lock().map_err(|_| Error::WorkerPanic)?;
                         let (file, offset, index) = &mut *state;
                         loop {
-                            let Some(d) = descriptor(file, *index, *offset, self.length)? else {
+                            let next = if let Some(_map) = mapping {
+                                #[cfg(feature = "mmap")]
+                                {
+                                    mapped_descriptor(_map, *index, *offset)?
+                                }
+                                #[cfg(not(feature = "mmap"))]
+                                {
+                                    unreachable!()
+                                }
+                            } else if sequential {
+                                read_descriptor(file, *index, *offset, self.length)?
+                            } else {
+                                descriptor(file.get_mut(), *index, *offset, self.length)?
+                            };
+                            let Some(d) = next else {
                                 return Ok(());
                             };
                             *offset = d.payload_offset + d.size as u64;
                             *index += 1;
                             if d.kind == b"OSMData" {
-                                #[cfg(not(unix))]
-                                read_payload(file, &d, &mut compressed)?;
+                                if mapping.is_none() {
+                                    if sequential {
+                                        compressed.resize(d.size, 0);
+                                        file.read_exact(&mut compressed)?;
+                                    } else {
+                                        #[cfg(not(unix))]
+                                        read_payload(file.get_mut(), &d, &mut compressed)?;
+                                    }
+                                }
                                 break d;
+                            }
+                            if mapping.is_none() && sequential {
+                                file.seek_relative(d.size as i64)?;
                             }
                         }
                     };
@@ -916,8 +1088,20 @@ impl PbfReader {
                     handler(&mut PbfBlock {
                         descriptor: &d,
                         compressed: &mut compressed,
-                        #[cfg(unix)]
-                        source_file: Some(&payload_file),
+                        source: if let Some(map) = mapping {
+                            BlockSource::Slice(&map[d.payload_offset as usize..][..d.size])
+                        } else if sequential {
+                            BlockSource::Buffered
+                        } else {
+                            #[cfg(unix)]
+                            {
+                                BlockSource::File(&payload_file)
+                            }
+                            #[cfg(not(unix))]
+                            {
+                                BlockSource::Buffered
+                            }
+                        },
                         scratch: &mut scratch,
                         prepared: false,
                         parameters: Parameters::default(),
@@ -1000,15 +1184,14 @@ pub(crate) fn input_pbf(
                         .ok_or(Error::Invalid("Invalid PBF string ID"))
                 };
                 let tags = |source: &[TagIds]| -> Result<Vec<Tag<'_>>> {
-                    source
-                        .iter()
-                        .map(|t| {
-                            Ok(Tag {
-                                key: string(t.key)?,
-                                value: string(t.value)?,
-                            })
-                        })
-                        .collect()
+                    let mut result = Vec::with_capacity(source.len());
+                    for t in source {
+                        result.push(Tag {
+                            key: string(t.key)?,
+                            value: string(t.value)?,
+                        });
+                    }
+                    Ok(result)
                 };
                 let metadata = |source: &[Metadata],
                                 index: usize,
@@ -1064,18 +1247,14 @@ pub(crate) fn input_pbf(
                     }
                     GroupBatch::Relations(b) if b.context.count != 0 => {
                         let all_tags = tags(b.tags.values)?;
-                        let members: Vec<_> = b
-                            .member_ids
-                            .iter()
-                            .enumerate()
-                            .map(|(i, &id)| {
-                                Ok(RelationMember {
-                                    id,
-                                    member_type: b.member_types[i],
-                                    role: string(b.member_roles[i])?,
-                                })
-                            })
-                            .collect::<Result<_>>()?;
+                        let mut members = Vec::with_capacity(b.member_ids.len());
+                        for (i, &id) in b.member_ids.iter().enumerate() {
+                            members.push(RelationMember {
+                                id,
+                                member_type: b.member_types[i],
+                                role: string(b.member_roles[i])?,
+                            });
+                        }
                         let mut relations = Vec::with_capacity(b.context.count);
                         for i in 0..b.context.count {
                             relations.push(Relation {

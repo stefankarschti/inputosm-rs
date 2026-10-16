@@ -1,0 +1,55 @@
+{
+  "utc": "2026-10-16T07:11:11Z",
+  "cpu_count": 32,
+  "rounds": 3,
+  "threads": [
+    32
+  ],
+  "single_cpu": null,
+  "cache": "No cache clearing. One warmup per candidate, map, and thread count.",
+  "candidates": [
+    {
+      "name": "baseline",
+      "path": "/home/stefan/inputosm-rs/target/implementation-baseline/entity_profile",
+      "mode": "entities",
+      "sha256": "a64f4605a0b45507a4615948de9592caead5f3fcc125670d9e9c4787a953c134"
+    },
+    {
+      "name": "capacity",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "entities",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "views",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "public-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "sequential",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "sequential-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "mapped",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "mapped-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "cpp",
+      "path": "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "mode": "entities",
+      "sha256": "2f7a5416aad9e5e360aec427fc5d806bfd4700568c6e350fd7d2d45f14d7ea35"
+    }
+  ],
+  "maps": [
+    {
+      "path": "/mnt/maps/planet-260907.osm.pbf",
+      "bytes": 94746421723,
+      "mtime_ns": 1789055678000000000
+    }
+  ]
+}

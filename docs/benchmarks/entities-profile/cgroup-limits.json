@@ -1,0 +1,28 @@
+{
+  "/sys/fs/cgroup": {
+    "cpu.max": "max 100000",
+    "cpu.stat": "usage_usec 1621477598933\nuser_usec 1435081645515\nsystem_usec 186395953418\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+    "memory.max": "max",
+    "memory.current": "115159334912",
+    "io.max": ""
+  },
+  "/sys/fs/cgroup/user.slice": {
+    "cpu.max": "max 100000",
+    "cpu.stat": "usage_usec 1498123316262\nuser_usec 1336814343841\nsystem_usec 161308972420\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+    "memory.max": "max",
+    "memory.current": "99248402432",
+    "io.max": ""
+  },
+  "/sys/fs/cgroup/user.slice/user-1000.slice": {
+    "cpu.max": "max 100000",
+    "cpu.stat": "usage_usec 1498123316856\nuser_usec 1336814344371\nsystem_usec 161308972484\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+    "memory.max": "max",
+    "memory.current": "87249932288"
+  },
+  "/sys/fs/cgroup/user.slice/user-1000.slice/session-384207.scope": {
+    "cpu.max": "max 100000",
+    "cpu.stat": "usage_usec 481673576717\nuser_usec 454245248176\nsystem_usec 27428328541\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+    "memory.max": "max",
+    "memory.current": "83802566656"
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "workload": "entities",
+    "cpp": {
+      "median_seconds": 1.382934827,
+      "min_seconds": 1.376628829,
+      "max_seconds": 1.408760193,
+      "median_cpu_seconds": 1.37,
+      "max_rss_kib": 353648
+    },
+    "rust": {
+      "median_seconds": 1.65858083,
+      "min_seconds": 1.598221171,
+      "max_seconds": 1.672162234,
+      "median_cpu_seconds": 1.6500000000000001,
+      "max_rss_kib": 37044
+    },
+    "cpp_over_rust": 0.833806108201552
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "workload": "entities",
+    "cpp": {
+      "median_seconds": 0.144592198,
+      "min_seconds": 0.122479132,
+      "max_seconds": 0.164132793,
+      "median_cpu_seconds": 2.66,
+      "max_rss_kib": 655904
+    },
+    "rust": {
+      "median_seconds": 0.117167832,
+      "min_seconds": 0.110348869,
+      "max_seconds": 0.13087759,
+      "median_cpu_seconds": 3.04,
+      "max_rss_kib": 313780
+    },
+    "cpp_over_rust": 1.2340605397563387
+  }
+]

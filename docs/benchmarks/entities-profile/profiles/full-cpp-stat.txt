@@ -1,0 +1,14 @@
+# started on Fri Oct 16 06:12:38 2026
+
+
+ Performance counter stats for 'taskset -c 0 target/entity-profile/cpp /mnt/maps/romania-260701.osm.pbf entities 1' (3 runs):
+
+        9267365993      cycles                           #    4.823 GHz                         ( +-  3.62% )
+       23172250039      instructions                     #    2.50  insn per cycle              ( +-  0.00% )
+        3660841193      branches                         #    1.905 G/sec                       ( +-  0.00% )
+         102802673      branch-misses                    #    2.81% of all branches             ( +-  0.18% )
+           7877620      cache-misses                                                            ( +- 12.24% )
+           1921.56 msec task-clock                       #    0.999 CPUs utilized               ( +-  4.40% )
+
+            1.9227 +- 0.0847 seconds time elapsed  ( +-  4.41% )
+

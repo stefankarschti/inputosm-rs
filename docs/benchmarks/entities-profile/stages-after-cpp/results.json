@@ -1,0 +1,72 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "mode": "entities",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "entities",
+      "32"
+    ],
+    "csv": {
+      "mode": "entities",
+      "threads": "32",
+      "seconds": "33.623645465",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 1.705633743,
+      "framing": 1.315114879,
+      "payload_read": 71.134710434,
+      "blob_decode": 361.950970308,
+      "decode_total": 638.522039855,
+      "strings": 7.592889744,
+      "group_consumer": 330.398653857,
+      "entity_handler": 116.074526612,
+      "columns_and_decode_overhead": 300.530496254,
+      "adapter": 214.324127245
+    }
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "mode": "views",
+    "command": [
+      "/home/stefan/inputosm-rs/target/entity-profile/variants/stages/target/release/entity_profile",
+      "/mnt/maps/planet-260907.osm.pbf",
+      "views",
+      "32"
+    ],
+    "csv": {
+      "mode": "views",
+      "threads": "32",
+      "seconds": "25.654210653",
+      "nodes": "10846489004",
+      "ways": "1216465009",
+      "relations": "14708384",
+      "checksum": "14286621645908380591",
+      "node_bytes": "72",
+      "way_bytes": "72",
+      "relation_bytes": "72"
+    },
+    "worker_seconds": {
+      "lock_wait": 1.142565688,
+      "framing": 0.797269249,
+      "payload_read": 44.112760947,
+      "blob_decode": 317.868327711,
+      "decode_total": 455.771055626,
+      "strings": 5.600298247,
+      "group_consumer": 157.277782898,
+      "entity_handler": 0.0,
+      "columns_and_decode_overhead": 292.892974481,
+      "adapter": 0
+    }
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "utc": "2026-10-16T07:09:41Z",
+  "cpu_count": 32,
+  "rounds": 3,
+  "threads": [
+    32
+  ],
+  "single_cpu": null,
+  "cache": "POSIX_FADV_DONTNEED before every process; underlying storage caches remain uncontrolled.",
+  "candidates": [
+    {
+      "name": "views",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "public-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "sequential",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "sequential-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "mapped",
+      "path": "/home/stefan/inputosm-rs/target/entity-implementation/release/entity_performance",
+      "mode": "mapped-views",
+      "sha256": "239d1cf058dc2e5ea14072db21ac506cf68946a9a2c5f086e2e7b54d52e45dec"
+    },
+    {
+      "name": "cpp",
+      "path": "/home/stefan/inputosm-rs/target/implementation-baseline/cpp",
+      "mode": "entities",
+      "sha256": "2f7a5416aad9e5e360aec427fc5d806bfd4700568c6e350fd7d2d45f14d7ea35"
+    }
+  ],
+  "maps": [
+    {
+      "path": "/mnt/maps/germany-260925.osm.pbf",
+      "bytes": 4847577526,
+      "mtime_ns": 1790379208000000000
+    }
+  ]
+}

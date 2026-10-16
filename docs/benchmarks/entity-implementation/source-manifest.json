@@ -1,0 +1,59 @@
+{
+  "baseline_git": "fe524f715452ae881be37a1190abd65736083082",
+  "build": "CARGO_PROFILE_RELEASE_DEBUG=1 cargo build --offline --release --features mmap --bin entity_performance --target-dir target/entity-implementation",
+  "sha256": {
+    "src/pbfcolumns.rs": "bda497d787231eebcb0dda7e27f8c2713f5fac78bf5d1872405e97625bc8cdf5",
+    "src/timeutil.rs": "c524975e87f667cfe9cc4da3411518bb15a7031023b0d6aad561e16e22e5a042",
+    "src/lib.rs": "91728d7edc0512b582449961fbe19e6f472bfca4a22b08d1d4db040d9fcebff1",
+    "src/inputosmxml.rs": "3872d28f19908f865e91b110c1726c80f16c92c453bba2c10bb3d3630069158c",
+    "src/inputosmpbf.rs": "763cae4283283fe4e273f04380397604b720d179f7d9c69ca1a9d40399ba2532",
+    "src/pbfviews.rs": "45c97a7f56eb33e0993609a23f5c15cd47f5af31ea4be20023e2290152678dd5",
+    "src/inputosm.rs": "66dcc57124b5eff040c67fc1d356ce59a19abc9fe210a3855c17912787a61aa8",
+    "src/inputosmlog.rs": "6be5b1fa2a9bb83a3d07cbaa17a98c1a68762098d2a6d27e46c14ef37583127f",
+    "Cargo.toml": "ef59ccacc958165f5bbcaf0d86a255922fcad26db792e616ee03348c8be3bee8",
+    "Cargo.lock": "b6b275bd0da09ee8404c4561322e18cc549eb5064681f623a6be8ec5f8708660",
+    "test/benchmark/entity_performance.rs": "abbfea97093909cdafc10ea48e0fa3d906d88336f0417a1aa597549aba071cc4",
+    "test/profile/compare.py": "889b85aa8d9639e0408eb2e523e6729d52e3496a87928c3ca5ecc403086a8d65",
+    "test/profile/build_variant.py": "f2860e83ecb7887a9b453cd1d42e9751ff9ead42cb301f1e98dd50c6a7decbe0",
+    "examples/entity_views.rs": "41a40773a4b9bfb630b12e755a9c0eb66bc480e78b3f075898603b3cd8cff597"
+  },
+  "cache_probe": {
+    "map": "germany-260925.osm.pbf",
+    "method": "POSIX_FADV_DONTNEED then sudo mincore",
+    "file_bytes": 4847577526,
+    "pages": 1183491,
+    "resident_pages": 0,
+    "note": "Separate verification after evicted comparison; not a per-run residency measurement."
+  },
+  "post_build_changes": {
+    "src/inputosmpbf.rs": {
+      "final_sha256": "2b43ba083a0c26d9bcb87b8f7df0c7b23ea2857a410a0a938e111808cdef3bbb",
+      "scope": "Rust documentation comments only"
+    },
+    "src/pbfviews.rs": {
+      "final_sha256": "7798af4e9e0fac17b39f006008df997269d4d9d52db2c89d65d8b69e1a1a4d15",
+      "scope": "Rust documentation comments only"
+    },
+    "test/benchmark/entity_performance.rs": {
+      "final_sha256": "8dd39cee8d494be731ae1ce82df954080309621f22a507bf37dab5b80c182593",
+      "scope": "Formatting only"
+    },
+    "test/profile/build_variant.py": {
+      "final_sha256": "fec9035ca484f19e348498748d4048464ad91ee697152572bf23f05e4d1393e6",
+      "scope": "Historical prototype builder; not used by measured processes"
+    },
+    "examples/entity_views.rs": {
+      "final_sha256": "730f7b0e426f7fe64210f173716974b8228673b8c38e64a4d6879adc0859d1a0",
+      "scope": "Formatting only"
+    }
+  },
+  "environment": {
+    "RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "CC": null,
+    "CFLAGS": null,
+    "CARGO_PROFILE_RELEASE_LTO": null,
+    "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": null,
+    "LD_PRELOAD": null
+  }
+}

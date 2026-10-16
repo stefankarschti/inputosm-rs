@@ -1,0 +1,124 @@
+--- a/src/inputosmpbf.rs
++++ b/src/inputosmpbf.rs
+@@ -480,10 +480,14 @@
+         #[cfg(unix)]
+         if let Some(file) = self.source_file {
+             use std::os::unix::fs::FileExt;
++            let _read = profiling::Guard::new(2);
+             self.compressed.resize(self.descriptor.size, 0);
+             file.read_exact_at(self.compressed, self.descriptor.payload_offset)?;
+         }
+-        blob_data(self.compressed, self.scratch)?;
++        {
++            let _inflate = profiling::Guard::new(3);
++            blob_data(self.compressed, self.scratch)?;
++        }
+         self.scratch.groups.clear();
+         self.scratch.tables.clear();
+         let raw = &self.scratch.raw;
+@@ -593,6 +597,8 @@
+         mut handler: impl FnMut(GroupBatch<'_>, &[&[u8]]) -> Result<()>,
+     ) -> Result<()> {
+         self.prepare()?;
++        let _decode = profiling::Guard::new(4);
++        let strings_time = profiling::Guard::new(5);
+         let mut table = Vec::new();
+         if strings {
+             visit_strings(&self.scratch.raw, &self.scratch.tables, |s| {
+@@ -600,6 +606,7 @@
+                 Ok(())
+             })?;
+         }
++        drop(strings_time);
+         let mut dense: [Vec<Field<'_>>; 10] = std::array::from_fn(|_| Vec::new());
+         for (group_index, range) in self.scratch.groups.iter().enumerate() {
+             let columns = &mut self.scratch.columns;
+@@ -638,6 +645,7 @@
+                 count: columns.count,
+                 parameters: self.parameters,
+             };
++            let _consumer = profiling::Guard::new(6);
+             handler(columns.batch(context, kind, options), &table)?;
+         }
+         Ok(())
+@@ -887,6 +895,7 @@
+         let stopped = AtomicBool::new(false);
+         let failure = Mutex::new(None);
+         let worker = |thread_index| {
++            let _report = profiling::Report::new(thread_index);
+             let work = || -> Result<()> {
+                 let mut scratch = Scratch::default();
+                 let mut compressed = Vec::new();
+@@ -895,7 +904,10 @@
+                         return Ok(());
+                     }
+                     let d = {
++                        let wait = profiling::Guard::new(0);
+                         let mut state = state.lock().map_err(|_| Error::WorkerPanic)?;
++                        drop(wait);
++                        let _framing = profiling::Guard::new(1);
+                         let (file, offset, index) = &mut *state;
+                         loop {
+                             let Some(d) = descriptor(file, *index, *offset, self.length)? else {
+@@ -1046,6 +1058,7 @@
+                                 metadata: metadata(b.metadata, i, b.context.parameters)?,
+                             });
+                         }
++                        let _handler = profiling::Guard::new(7);
+                         handler.nodes(context, &nodes)?;
+                     }
+                     GroupBatch::Ways(b) if b.context.count != 0 => {
+@@ -1060,6 +1073,7 @@
+                                 metadata: metadata(b.metadata, i, b.context.parameters)?,
+                             });
+                         }
++                        let _handler = profiling::Guard::new(7);
+                         handler.ways(context, &ways)?;
+                     }
+                     GroupBatch::Relations(b) if b.context.count != 0 => {
+@@ -1087,6 +1101,7 @@
+                                 metadata: metadata(b.metadata, i, b.context.parameters)?,
+                             });
+                         }
++                        let _handler = profiling::Guard::new(7);
+                         handler.relations(context, &relations)?;
+                     }
+                     _ => {}
+@@ -1096,3 +1111,37 @@
+         )
+     })
+ }
++
++mod profiling {
++    use std::{cell::Cell, time::Instant};
++    thread_local! {
++        static VALUES: Cell<[u64; 8]> = const { Cell::new([0; 8]) };
++    }
++    pub struct Guard(usize, Instant);
++    impl Guard {
++        pub fn new(index: usize) -> Self { Self(index, Instant::now()) }
++    }
++    impl Drop for Guard {
++        fn drop(&mut self) {
++            let ns = self.1.elapsed().as_nanos() as u64;
++            VALUES.with(|values| {
++                let mut v = values.get();
++                v[self.0] += ns;
++                values.set(v);
++            });
++        }
++    }
++    pub struct Report(usize);
++    impl Report {
++        pub fn new(thread: usize) -> Self {
++            VALUES.with(|v| v.set([0; 8]));
++            Self(thread)
++        }
++    }
++    impl Drop for Report {
++        fn drop(&mut self) {
++            VALUES.with(|v| eprintln!("profile_thread,{},{}", self.0,
++                v.get().map(|n| n.to_string()).join(",")));
++        }
++    }
++}

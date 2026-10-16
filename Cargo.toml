@@ -10,11 +10,13 @@ description = "Selective, parallel OpenStreetMap PBF and XML reader"
 libdeflate-sys = { version = "1.25", optional = true }
 flate2 = { version = "1.1", default-features = false, features = ["zlib-rs"], optional = true }
 xml = "1.4"
+memmap2 = { version = "0.9", optional = true }
 
 [features]
 default = ["libdeflate"]
 libdeflate = ["dep:libdeflate-sys"]
 rust-zlib = ["dep:flate2"]
+mmap = ["dep:memmap2"]
 
 [profile.release]
 lto = "thin"
@@ -27,3 +29,15 @@ path = "test/benchmark/pbf_benchmark.rs"
 [[example]]
 name = "count_entities"
 path = "examples/count_entities.rs"
+
+[[bin]]
+name = "entity_profile"
+path = "test/profile/entity_profile.rs"
+
+[[bin]]
+name = "allocation_profile"
+path = "test/profile/allocations.rs"
+
+[[bin]]
+name = "entity_performance"
+path = "test/benchmark/entity_performance.rs"

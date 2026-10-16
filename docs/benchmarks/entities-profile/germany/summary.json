@@ -1,0 +1,137 @@
+[
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 8,
+    "candidate": "cpp",
+    "median_seconds": 3.729520774,
+    "min_seconds": 3.503319454,
+    "max_seconds": 3.861299096,
+    "median_rss_kib": 4935488
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 8,
+    "candidate": "baseline",
+    "median_seconds": 3.726004494,
+    "min_seconds": 3.717763064,
+    "max_seconds": 4.069125604,
+    "median_rss_kib": 239100
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 8,
+    "candidate": "views",
+    "median_seconds": 3.375580679,
+    "min_seconds": 3.280754058,
+    "max_seconds": 3.612210459,
+    "median_rss_kib": 107144
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 8,
+    "candidate": "reserve",
+    "median_seconds": 3.676013564,
+    "min_seconds": 3.569326387,
+    "max_seconds": 4.17309466,
+    "median_rss_kib": 208820
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 8,
+    "candidate": "fused-views",
+    "median_seconds": 3.593839067,
+    "min_seconds": 3.237143299,
+    "max_seconds": 3.634735986,
+    "median_rss_kib": 104540
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 16,
+    "candidate": "cpp",
+    "median_seconds": 1.945409668,
+    "min_seconds": 1.93606399,
+    "max_seconds": 2.044078912,
+    "median_rss_kib": 5104352
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 16,
+    "candidate": "baseline",
+    "median_seconds": 2.100541771,
+    "min_seconds": 2.076756957,
+    "max_seconds": 2.108657464,
+    "median_rss_kib": 408328
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 16,
+    "candidate": "views",
+    "median_seconds": 1.752043963,
+    "min_seconds": 1.750694596,
+    "max_seconds": 1.846750233,
+    "median_rss_kib": 183904
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 16,
+    "candidate": "reserve",
+    "median_seconds": 1.928661305,
+    "min_seconds": 1.928619226,
+    "max_seconds": 1.986679513,
+    "median_rss_kib": 381144
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 16,
+    "candidate": "fused-views",
+    "median_seconds": 1.732590718,
+    "min_seconds": 1.732508075,
+    "max_seconds": 1.743484573,
+    "median_rss_kib": 178400
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "cpp",
+    "median_seconds": 1.567954526,
+    "min_seconds": 1.550350698,
+    "max_seconds": 1.572478695,
+    "median_rss_kib": 5409824
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "baseline",
+    "median_seconds": 1.578266818,
+    "min_seconds": 1.562038672,
+    "max_seconds": 1.615882943,
+    "median_rss_kib": 725876
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "views",
+    "median_seconds": 1.278533637,
+    "min_seconds": 1.26762218,
+    "max_seconds": 1.621030202,
+    "median_rss_kib": 313556
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "reserve",
+    "median_seconds": 1.510084726,
+    "min_seconds": 1.497222283,
+    "max_seconds": 1.512573802,
+    "median_rss_kib": 651956
+  },
+  {
+    "map": "germany-260925.osm.pbf",
+    "threads": 32,
+    "candidate": "fused-views",
+    "median_seconds": 1.243615933,
+    "min_seconds": 1.243595645,
+    "max_seconds": 1.247376999,
+    "median_rss_kib": 318872
+  }
+]

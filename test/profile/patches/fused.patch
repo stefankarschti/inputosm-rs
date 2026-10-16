@@ -1,0 +1,69 @@
+--- a/src/pbfcolumns.rs
++++ b/src/pbfcolumns.rs
+@@ -339,27 +339,47 @@
+             }
+             Ok(())
+         }
+-        if options.id {
+-            deltas(&fields[0], &mut self.ids)?;
++        let fused = options.id && options.latitude && options.longitude
++            && fields[..3].iter().all(|f| f.len() == 1 && f[0].wire == 2);
++        if fused {
++            let mut ids = Wire::new(fields[0][0].bytes);
++            let mut latitudes = Wire::new(fields[1][0].bytes);
++            let mut longitudes = Wire::new(fields[2][0].bytes);
++            let (mut id, mut latitude, mut longitude) = (0, 0, 0);
++            while !ids.bytes.is_empty() {
++                id = delta(id, zigzag(ids.varint()?))?;
++                latitude = delta(latitude, zigzag(latitudes.varint()?))?;
++                longitude = delta(longitude, zigzag(longitudes.varint()?))?;
++                self.ids.push(id);
++                self.latitudes.push(latitude);
++                self.longitudes.push(longitude);
++            }
+             self.count = self.ids.len();
++            require(latitudes.bytes.is_empty(), "Invalid dense latitude count")?;
++            require(longitudes.bytes.is_empty(), "Invalid dense longitude count")?;
+         } else {
+-            for f in &fields[0] {
+-                self.count += f.count()?;
+-            }
+-        }
+-        if options.latitude {
+-            deltas(&fields[1], &mut self.latitudes)?;
+-            require(
+-                self.latitudes.len() == self.count,
+-                "Invalid dense latitude count",
+-            )?;
+-        }
+-        if options.longitude {
+-            deltas(&fields[2], &mut self.longitudes)?;
+-            require(
+-                self.longitudes.len() == self.count,
+-                "Invalid dense longitude count",
+-            )?;
++            if options.id {
++                deltas(&fields[0], &mut self.ids)?;
++                self.count = self.ids.len();
++            } else {
++                for f in &fields[0] {
++                    self.count += f.count()?;
++                }
++            }
++            if options.latitude {
++                deltas(&fields[1], &mut self.latitudes)?;
++                require(
++                    self.latitudes.len() == self.count,
++                    "Invalid dense latitude count",
++                )?;
++            }
++            if options.longitude {
++                deltas(&fields[2], &mut self.longitudes)?;
++                require(
++                    self.longitudes.len() == self.count,
++                    "Invalid dense longitude count",
++                )?;
++            }
+         }
+         if options.metadata && !self.packed_info(fields)? {
+             self.info.resize(self.count, Metadata::default());
