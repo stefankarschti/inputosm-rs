@@ -1,0 +1,29 @@
+[package]
+name = "inputosm"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Selective, parallel OpenStreetMap PBF and XML reader"
+
+[dependencies]
+libdeflate-sys = { version = "1.25", optional = true }
+flate2 = { version = "1.1", default-features = false, features = ["zlib-rs"], optional = true }
+xml = "1.4"
+
+[features]
+default = ["libdeflate"]
+libdeflate = ["dep:libdeflate-sys"]
+rust-zlib = ["dep:flate2"]
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+[[bin]]
+name = "pbf_benchmark"
+path = "test/benchmark/pbf_benchmark.rs"
+
+[[example]]
+name = "count_entities"
+path = "examples/count_entities.rs"
