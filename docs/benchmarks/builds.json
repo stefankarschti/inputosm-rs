@@ -1,0 +1,26 @@
+{
+  "cpp_revision": "d93762b63398afee948ec0e1ca4e4328bba25177",
+  "cpp_compiler": "Ubuntu clang version 19.1.1 (1ubuntu1~24.04.2)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/lib/llvm-19/bin\n",
+  "cpp_flags": "-std=c++20 -O3 -DNDEBUG; no LTO; default target CPU",
+  "rust_compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1\n",
+  "rust_flags": "Cargo release; opt-level=3; thin LTO; codegen-units=1; default target CPU",
+  "libdeflate_cpp": "1.26",
+  "libdeflate_rust": "1.26 (libdeflate-sys 1.26.1)",
+  "zlib_rs": "0.6.8 via flate2 1.1.10",
+  "cpp_source_sha256": {
+    "src/inputosmlog.hpp": "3cfbed4a0d78d4c91968785b47c8553297172c0abb43b0dc0768a8d38e2332cf",
+    "src/inputosmpbf.cpp": "d609bb1a7b7152ee48aad54592db163d12ec56dca2f335144fe673bf5ccff683",
+    "src/pbfcolumns.hpp": "34e30e8470b6bcbc1b2f09f88e136e04eac66da2167b905da907e549e0ca50e6",
+    "src/timeutil.hpp": "6cb2b506a7e9391ad6666da77c6644a9da937b5afbdcf6493f3b74fd606dd9db",
+    "src/inputosmlog.cpp": "301febdd9884a7bec761d7c2e0d36058d7f014aa6fe27807792459a9f53300e1",
+    "src/timeutil.cpp": "395fe7466f09b73b8fdce16761441f398c26e1e42b8c8e2c49e5734bdc01ec6b",
+    "src/inputosmxml.cpp": "9382e7dee4f65d5ab59b9f1aea473b340ed48ac649c1744033a4328f61608ef8",
+    "src/inputosm.cpp": "fb34954bd0da6d1e791cdf0ba5dc7f97c984c174880ea5c487f739759dca2a40",
+    "include/inputosm/inputosm.hpp": "cfffd815522740c7e4354bcd991570b7e313734bd02f25244fa7d80e274a56e9",
+    "test/benchmark/pbf_benchmark.cpp": "a1ece128acd5ae0d405cac8e96bebea3d5031c607950464594faf31fe992e68e"
+  },
+  "libdeflate_cpp_c_compiler": "clang-19; -O3 -DNDEBUG -std=gnu11; original CMake archive",
+  "libdeflate_rust_c_compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0; cc crate release defaults; CC and CFLAGS unset",
+  "rust_revision": "8d06b45",
+  "host_memory_total_kib": 130985216
+}

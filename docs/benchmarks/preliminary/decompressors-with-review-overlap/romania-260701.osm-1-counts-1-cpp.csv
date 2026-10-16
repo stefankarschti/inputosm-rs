@@ -1,0 +1,2 @@
+mode,threads,metadata,iteration,file_bytes,setup_seconds,read_seconds,total_seconds,index_build_seconds,blocks,max_index,nodes,ways,relations,checksum,values_checksum,strings,index_bytes
+blocks,1,0,0,323127585,0.000054322,0.731720411,0.731774733,0.000000000,5544,5544,40101568,4169405,66761,0,0,0,0

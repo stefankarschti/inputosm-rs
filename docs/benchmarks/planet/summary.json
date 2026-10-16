@@ -1,0 +1,82 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 14.133629042,
+      "min_seconds": 13.652989108,
+      "max_seconds": 35.70759582,
+      "median_cpu_seconds": 307.59000000000003,
+      "max_rss_kib": 92872404
+    },
+    "rust": {
+      "median_seconds": 34.373033728,
+      "min_seconds": 13.544269484,
+      "max_seconds": 35.796406884,
+      "median_cpu_seconds": 355.13,
+      "max_rss_kib": 279296
+    },
+    "cpp_over_rust": 0.41118363755268006
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "workload": "nodes",
+    "cpp": {
+      "median_seconds": 16.689104614,
+      "min_seconds": 16.551535298,
+      "max_seconds": 16.891855159,
+      "median_cpu_seconds": 397.78000000000003,
+      "max_rss_kib": 92884868
+    },
+    "rust": {
+      "median_seconds": 16.82382712,
+      "min_seconds": 16.73349663,
+      "max_seconds": 17.431337749,
+      "median_cpu_seconds": 492.40999999999997,
+      "max_rss_kib": 292864
+    },
+    "cpp_over_rust": 0.9919921605804043
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "workload": "full",
+    "cpp": {
+      "median_seconds": 29.954247585,
+      "min_seconds": 29.37882525,
+      "max_seconds": 30.287376565,
+      "median_cpu_seconds": 797.09,
+      "max_rss_kib": 93179556
+    },
+    "rust": {
+      "median_seconds": 28.469877382,
+      "min_seconds": 28.191391424,
+      "max_seconds": 28.620567617,
+      "median_cpu_seconds": 845.95,
+      "max_rss_kib": 511744
+    },
+    "cpp_over_rust": 1.052138271727805
+  },
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "workload": "entities",
+    "cpp": {
+      "median_seconds": 26.560687116,
+      "min_seconds": 26.475097919,
+      "max_seconds": 26.757068885,
+      "median_cpu_seconds": 665.74,
+      "max_rss_kib": 93434300
+    },
+    "rust": {
+      "median_seconds": 32.925254856,
+      "min_seconds": 32.796639603,
+      "max_seconds": 33.822002492,
+      "median_cpu_seconds": 966.79,
+      "max_rss_kib": 696804
+    },
+    "cpp_over_rust": 0.8066964775873199
+  }
+]

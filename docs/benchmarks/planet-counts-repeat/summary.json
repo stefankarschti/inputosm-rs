@@ -1,0 +1,22 @@
+[
+  {
+    "map": "planet-260907.osm.pbf",
+    "threads": 32,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 13.565374884,
+      "min_seconds": 13.498776657,
+      "max_seconds": 14.125168513,
+      "median_cpu_seconds": 304.35999999999996,
+      "max_rss_kib": 92896332
+    },
+    "rust": {
+      "median_seconds": 13.687265,
+      "min_seconds": 13.543223324,
+      "max_seconds": 13.868145175,
+      "median_cpu_seconds": 393.35,
+      "max_rss_kib": 279296
+    },
+    "cpp_over_rust": 0.991094633149866
+  }
+]

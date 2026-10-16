@@ -1,0 +1,162 @@
+[
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 0.229267408,
+      "min_seconds": 0.227912883,
+      "max_seconds": 0.23040723,
+      "median_cpu_seconds": 0.22,
+      "max_rss_kib": 6656
+    },
+    "rust": {
+      "median_seconds": 0.355935889,
+      "min_seconds": 0.355025348,
+      "max_seconds": 0.358058998,
+      "median_cpu_seconds": 0.35000000000000003,
+      "max_rss_kib": 6656
+    },
+    "cpp_over_rust": 0.6441255717262049
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 1,
+    "workload": "full",
+    "cpp": {
+      "median_seconds": 0.55183415,
+      "min_seconds": 0.518152318,
+      "max_seconds": 0.573328395,
+      "median_cpu_seconds": 0.54,
+      "max_rss_kib": 14592
+    },
+    "rust": {
+      "median_seconds": 0.619858358,
+      "min_seconds": 0.616883408,
+      "max_seconds": 0.760293203,
+      "median_cpu_seconds": 0.61,
+      "max_rss_kib": 14336
+    },
+    "cpp_over_rust": 0.8902584644990784
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 0.030276715,
+      "min_seconds": 0.027643046,
+      "max_seconds": 0.031507427,
+      "median_cpu_seconds": 0.34,
+      "max_rss_kib": 37376
+    },
+    "rust": {
+      "median_seconds": 0.034518916,
+      "min_seconds": 0.03163641,
+      "max_seconds": 0.037744096,
+      "median_cpu_seconds": 0.55,
+      "max_rss_kib": 38992
+    },
+    "cpp_over_rust": 0.8771050342368805
+  },
+  {
+    "map": "berlin-260514.osm.pbf",
+    "threads": 32,
+    "workload": "full",
+    "cpp": {
+      "median_seconds": 0.058825975,
+      "min_seconds": 0.057597527,
+      "max_seconds": 0.059969282,
+      "median_cpu_seconds": 0.87,
+      "max_rss_kib": 88932
+    },
+    "rust": {
+      "median_seconds": 0.068878813,
+      "min_seconds": 0.065650417,
+      "max_seconds": 0.070560332,
+      "median_cpu_seconds": 1.06,
+      "max_rss_kib": 91136
+    },
+    "cpp_over_rust": 0.854050359433459
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 0.72808097,
+      "min_seconds": 0.725367162,
+      "max_seconds": 0.730062433,
+      "median_cpu_seconds": 0.72,
+      "max_rss_kib": 5376
+    },
+    "rust": {
+      "median_seconds": 1.115278514,
+      "min_seconds": 1.105340652,
+      "max_seconds": 1.118035083,
+      "median_cpu_seconds": 1.1,
+      "max_rss_kib": 5376
+    },
+    "cpp_over_rust": 0.6528243491293512
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 1,
+    "workload": "full",
+    "cpp": {
+      "median_seconds": 1.746282949,
+      "min_seconds": 1.693795315,
+      "max_seconds": 1.924594589,
+      "median_cpu_seconds": 1.74,
+      "max_rss_kib": 21504
+    },
+    "rust": {
+      "median_seconds": 2.069336155,
+      "min_seconds": 2.027627612,
+      "max_seconds": 2.070853367,
+      "median_cpu_seconds": 2.06,
+      "max_rss_kib": 21760
+    },
+    "cpp_over_rust": 0.8438855836837201
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "workload": "counts",
+    "cpp": {
+      "median_seconds": 0.059333418,
+      "min_seconds": 0.057344351,
+      "max_seconds": 0.061866898,
+      "median_cpu_seconds": 1.04,
+      "max_rss_kib": 62720
+    },
+    "rust": {
+      "median_seconds": 0.066823501,
+      "min_seconds": 0.063146062,
+      "max_seconds": 0.068376489,
+      "median_cpu_seconds": 1.65,
+      "max_rss_kib": 63232
+    },
+    "cpp_over_rust": 0.8879124426599558
+  },
+  {
+    "map": "romania-260701.osm.pbf",
+    "threads": 32,
+    "workload": "full",
+    "cpp": {
+      "median_seconds": 0.116531434,
+      "min_seconds": 0.115853942,
+      "max_seconds": 0.116811881,
+      "median_cpu_seconds": 2.91,
+      "max_rss_kib": 208012
+    },
+    "rust": {
+      "median_seconds": 0.136079852,
+      "min_seconds": 0.135735185,
+      "max_seconds": 0.137021823,
+      "median_cpu_seconds": 3.57,
+      "max_rss_kib": 208896
+    },
+    "cpp_over_rust": 0.8563459783892181
+  }
+]

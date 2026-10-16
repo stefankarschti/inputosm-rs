@@ -1,0 +1,2 @@
+mode,threads,metadata,iteration,file_bytes,requests,setup_seconds,read_seconds,total_seconds,cpu_seconds,max_rss_kib,minor_faults,major_faults,blocks,max_index,nodes,ways,relations,checksum,index_bytes,live_rss_kib,live_pss_kib,live_anon_kib,index_build_seconds,teardown_seconds,page_table_kib,node_fields,way_fields,relation_fields,count_fields,strings,values_checksum,consume
+blocks,1,0,0,4847577526,0,0.000293522,11.762715464,11.947068100,12.010099,4738800,76583,0,64036,64036,440211917,71159227,910710,0,0,4742924,4739509,5108,0.000000000,0.184059114,9336,-1,-1,-1,15,0,0,ids

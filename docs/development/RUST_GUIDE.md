@@ -12,9 +12,9 @@ A slice such as `&[i64]` borrows consecutive integers.
 The reader uses slices for IDs, coordinates, and entity lists.
 The compiler prevents a callback from keeping these slices after their buffer becomes unavailable.
 
-Copy data into a `Vec` when the application must retain it.
+When the application must retain data, copy it into a `Vec`.
 This copy is explicit and has a cost.
-Use borrowed views when the application can process each batch immediately.
+When the application can process each batch immediately, use borrowed views.
 
 | C++ concept | Rust representation in this project |
 |---|---|
@@ -31,7 +31,7 @@ Use borrowed views when the application can process each batch immediately.
 `Result<T, Error>` has two forms: `Ok(value)` and `Err(error)`.
 The `?` operator returns an error from the current function.
 It does not discard the error.
-Return `Error::Cancelled` when a callback must stop reading.
+When a callback must stop reading, return `Error::Cancelled`.
 
 Rust panics indicate failed assumptions or an explicit `panic!()` call.
 Use returned errors for malformed files and expected application failures.
@@ -43,10 +43,10 @@ The parallel reader joins its workers before it returns a callback error.
 The block callback must support shared access because several workers can call it concurrently.
 The `Sync` bound expresses this requirement in the type system.
 
-Use worker-local totals when each worker processes many entities.
+When each worker processes many entities, use worker-local totals.
 Combine the totals after reading.
 A lock or atomic update for every individual node can limit throughput.
-The benchmark uses one counter per worker and updates it once per block.
+Sequential block benchmarks use one counter per worker and update it once per block.
 
 ## Performance
 
@@ -58,7 +58,7 @@ Data layout, allocation, decompression, file access, and compiler decisions affe
 This port uses selected columns, reusable buffers, checked arithmetic, and parallel decompression.
 The common protobuf parser path permits compiler inlining.
 Rare group handling uses a separate function.
-The benchmark compares equivalent decoded values before it compares elapsed times.
+The benchmark compares counts and checksums before it compares elapsed times.
 
 ## Dependencies
 

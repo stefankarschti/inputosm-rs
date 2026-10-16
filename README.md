@@ -76,7 +76,7 @@ Use `decode_entities_with_strings()` to resolve string IDs inside the same callb
 An `EntityHandler` receives node, way, and relation batches.
 Its default methods ignore the corresponding entity type.
 The PBF entity path still decodes all entity types and resolves their strings.
-Use selected block decoding when unwanted fields affect performance.
+When unwanted fields affect performance, use selected block decoding.
 
 Callbacks receive `Context` with the file type, OSC operation, block index, and worker index.
 The library has no global parser state.
@@ -86,7 +86,7 @@ XML and OSC callbacks execute sequentially.
 ## Data contracts
 
 - Callback slices remain valid only during their callback.
-- PBF string values are byte slices. Use `std::str::from_utf8()` when text is required.
+- PBF string values are byte slices. When text is required, use `std::str::from_utf8()`.
 - PBF batch coordinates retain their encoded values.
 - Use `Parameters` to convert batch coordinates into nanodegrees.
 - Entity coordinates use units of 100 nanodegrees.
@@ -154,6 +154,7 @@ These differences affect random-access performance and memory measurements.
 - [Port plan](docs/development/PLAN.md)
 - [Review record](docs/development/REVIEW.md)
 - [Benchmark procedure](docs/benchmarks/PROCEDURE.md)
+- [Benchmark results](docs/benchmarks/RESULTS.md)
 - [Project instructions](AGENTS.md)
 
 The original source and this port use the Apache-2.0 license.

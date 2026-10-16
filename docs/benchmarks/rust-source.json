@@ -1,0 +1,12 @@
+{
+  "Cargo.toml": "adf0cae0a446b75b21dec0101d3ae3fbfadf7a0ec8ac8a4b90f57570cbbda469",
+  "Cargo.lock": "9729786b2ceeff44d8717144ef1c9e721a20efd060073ff761b3cdf71c4ba9b3",
+  "src/pbfcolumns.rs": "bda497d787231eebcb0dda7e27f8c2713f5fac78bf5d1872405e97625bc8cdf5",
+  "src/timeutil.rs": "c524975e87f667cfe9cc4da3411518bb15a7031023b0d6aad561e16e22e5a042",
+  "src/lib.rs": "401d2567414363552aa2bfc7fb70cd4e80f68935b265ea8103862b8f99f07716",
+  "src/inputosmxml.rs": "3872d28f19908f865e91b110c1726c80f16c92c453bba2c10bb3d3630069158c",
+  "src/inputosmpbf.rs": "cfeee8705efa3906d9b1c3eda6485e860e6a4618d3f2d65774b650af4a2e9ae5",
+  "src/inputosm.rs": "66dcc57124b5eff040c67fc1d356ce59a19abc9fe210a3855c17912787a61aa8",
+  "src/inputosmlog.rs": "6be5b1fa2a9bb83a3d07cbaa17a98c1a68762098d2a6d27e46c14ef37583127f",
+  "test/benchmark/pbf_benchmark.rs": "72cc62c8449af38e0df2cdc32665b6260f4f7267bcad93cfc6d7e925659b1097"
+}

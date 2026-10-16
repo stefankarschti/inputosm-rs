@@ -6,4 +6,5 @@
 - [Writing guide](development/WRITING_GUIDE.md)
 - [Review record](development/REVIEW.md)
 - [Benchmark procedure](benchmarks/PROCEDURE.md)
+- [Benchmark results](benchmarks/RESULTS.md)
 - [Rust concepts](development/RUST_GUIDE.md)

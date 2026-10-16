@@ -4,6 +4,12 @@ The Rust executable accepts the original benchmark arguments.
 Its output contains entity counts, ID checksums, selected-value checksums, and elapsed times.
 The Python runner measures process CPU time and peak resident memory with `/usr/bin/time`.
 
+The main timing uses `total_seconds` from each executable.
+It includes reader setup, reading, and teardown.
+C++ excludes its live-memory sampling from this timing.
+Process wall and CPU measurements include that sampling.
+Rust does not perform that sampling.
+
 ```sh
 cargo build --release --bin pbf_benchmark
 python3 test/benchmark/compare.py \
@@ -25,10 +31,16 @@ One warmup precedes three measured rounds by default.
 The runner alternates implementation order.
 It records the command, binary hash, input metadata, raw output, CPU time, and peak memory.
 
+The counts workload compares entity totals.
+The entity workload compares totals and summed IDs.
+Column workloads also compare selected-value sums.
+These sums do not verify order or entity associations.
+The entity comparison does not verify resolved coordinates, tags, members, or metadata.
+
 Inputs must remain unchanged during the benchmark.
 The runner does not clear the operating system page cache.
 Warmup does not guarantee that a complete planet file remains cached.
-Report these runs as uncontrolled-cache measurements unless separate evidence establishes cache residency.
+Unless separate evidence establishes cache residency, report these runs as uncontrolled-cache measurements.
 
 Use `--workloads counts nodes full entities` to select workloads.
 Use `--threads 32` for parallel measurements only.

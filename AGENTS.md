@@ -56,12 +56,13 @@ Compare API claims with source code.
 Compare benchmark claims with recorded data.
 Validate local links and executable examples.
 Record the review scope and limitations in `docs/development/REVIEW.md`.
+
 Do not treat sentence-length checks as proof of full ASD-STE100 compliance.
 
 ## Architecture and validation
 
 Read [the architecture](docs/architecture/OVERVIEW.md) before changing component responsibilities.
-Update that document when responsibilities or data flows change.
+When responsibilities or data flows change, update that document.
 Keep technical documents in `docs/`, except for this file and the root `README.md`.
 Keep the source structure close to the original inputosm project.
 Document Rust API differences and dependency decisions.
